@@ -1,26 +1,159 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 204 22% 8%;
+  --foreground: 210 12% 89%;
+  --card: 198 22% 10%;
+  --card-foreground: 210 12% 89%;
+  --popover: 198 20% 14%;
+  --popover-foreground: 210 12% 89%;
+  --primary: 10 100% 61%;
+  --primary-foreground: 204 22% 8%;
+  --secondary: 42 65% 55%;
+  --secondary-foreground: 40 100% 8%;
+  --muted: 198 22% 10%;
+  --muted-foreground: 176 9% 64%;
+  --accent: 163 57% 60%;
+  --accent-foreground: 164 100% 11%;
+  --destructive: 4 100% 71%;
+  --destructive-foreground: 4 100% 20%;
+  --border: 198 20% 21%;
+  --input: 198 20% 21%;
+  --ring: 10 100% 61%;
+  --radius: 0.25rem;
+
+  --ink: #0c1114;
+  --reel: #141c20;
+  --raised: #1c282d;
+  --hairline: #2a3a40;
+  --bone: #ede8dc;
+  --fog: #9ba9a8;
+  --vermilion: #ff5b3a;
+  --brass: #d9a441;
+  --sea-glass: #5fd3b3;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-ink: var(--ink);
+  --color-reel: var(--reel);
+  --color-raised: var(--raised);
+  --color-hairline: var(--hairline);
+  --color-bone: var(--bone);
+  --color-fog: var(--fog);
+  --color-vermilion: var(--vermilion);
+  --color-brass: var(--brass);
+  --color-sea-glass: var(--sea-glass);
+  --font-sans: var(--font-work-sans), var(--font-geist-sans), sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), var(--font-geist-mono), monospace;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: hsl(var(--border));
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--font-work-sans), var(--font-geist-sans), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--vermilion);
+  color: var(--ink);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--vermilion);
+  outline-offset: 2px;
+}
+
+@utility editorial-display {
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.07;
+  letter-spacing: -0.03em;
+}
+
+@utility editorial-headline {
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+@utility metadata {
+  font-family: var(--font-jetbrains-mono), var(--font-geist-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@utility poster-frame {
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--reel);
+}
+
+@utility film-rule {
+  border-color: var(--hairline);
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
+@utility poster-lift {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--fog) 40%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poster-lift {
+    transition: none;
+  }
 }
