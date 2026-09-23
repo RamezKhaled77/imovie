@@ -1,34 +1,34 @@
 ---
 name: Cinematic Editorial
 colors:
-  surface: "#0f1417"
-  surface-dim: "#0f1417"
-  surface-bright: "#353a3d"
-  surface-container-lowest: "#0a0f12"
-  surface-container-low: "#171c1f"
-  surface-container: "#1b2023"
-  surface-container-high: "#262b2e"
-  surface-container-highest: "#303539"
-  on-surface: "#dfe3e7"
-  on-surface-variant: "#e3beb6"
-  inverse-surface: "#dfe3e7"
-  inverse-on-surface: "#2c3134"
+  surface: "#0c1114"
+  surface-dim: "#0c1114"
+  surface-bright: "#1c282d"
+  surface-container-lowest: "#0c1114"
+  surface-container-low: "#141c20"
+  surface-container: "#1c282d"
+  surface-container-high: "#1c282d"
+  surface-container-highest: "#1c282d"
+  on-surface: "#ede8dc"
+  on-surface-variant: "#9ba9a8"
+  inverse-surface: "#ede8dc"
+  inverse-on-surface: "#0c1114"
   outline: "#aa8982"
   outline-variant: "#5b403b"
-  surface-tint: "#ffb4a4"
-  primary: "#ffb4a4"
-  on-primary: "#640d00"
+  surface-tint: "#ff5b3a"
+  primary: "#ff5b3a"
+  on-primary: "#0c1114"
   primary-container: "#ff5b3a"
-  on-primary-container: "#5b0b00"
-  inverse-primary: "#b52609"
-  secondary: "#f5bd58"
-  on-secondary: "#422c00"
-  secondary-container: "#976a00"
-  on-secondary-container: "#fff7f0"
-  tertiary: "#67daba"
-  on-tertiary: "#00382c"
-  tertiary-container: "#25a587"
-  on-tertiary-container: "#003327"
+  on-primary-container: "#0c1114"
+  inverse-primary: "#e94a2c"
+  secondary: "#d9a441"
+  on-secondary: "#271900"
+  secondary-container: "#d9a441"
+  on-secondary-container: "#271900"
+  tertiary: "#5fd3b3"
+  on-tertiary: "#002018"
+  tertiary-container: "#5fd3b3"
+  on-tertiary-container: "#002018"
   error: "#ffb4ab"
   on-error: "#690005"
   error-container: "#93000a"
@@ -45,9 +45,9 @@ colors:
   tertiary-fixed-dim: "#67daba"
   on-tertiary-fixed: "#002018"
   on-tertiary-fixed-variant: "#005140"
-  background: "#0f1417"
-  on-background: "#dfe3e7"
-  surface-variant: "#303539"
+  background: "#0c1114"
+  on-background: "#ede8dc"
+  surface-variant: "#1c282d"
 typography:
   display-hero:
     fontFamily: Newsreader
@@ -134,6 +134,12 @@ spacing:
   space-lg: 1.5rem
   space-xl: 2.5rem
 ---
+
+## Implementation Contract
+
+The source implementation lives in `app/globals.css` and uses Tailwind CSS v4's `@theme inline` block. Use the HSL-backed semantic tokens (`background`, `card`, `primary`, `muted`, and related shadcn names) for reusable components. Use the hex-backed cinematic tokens (`surface-*`, `content-*`, `brand-*`, `status-*`, and border tokens) for editorial surfaces and state styling.
+
+Fonts are loaded by `next/font/google` in `app/layout.tsx`: Newsreader for headings, Work Sans for interface text, and JetBrains Mono for metadata. `tw-animate-css` is imported globally for shadcn animation utilities. The application is dark-first; the `.dark` variant is available for Tailwind component states, while the root palette remains the default visual theme.
 
 ## Brand & Style
 

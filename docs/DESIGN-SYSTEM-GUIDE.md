@@ -12,7 +12,7 @@ A practical reference for building iMovie screens with the cinematic editorial s
 | shadcn semantic colors       | Applied         | `app/globals.css`                                           |
 | Editorial color tokens       | Applied         | `app/globals.css`                                           |
 | Poster and film utilities    | Available       | `app/globals.css`                                           |
-| Home page visual composition | Not yet applied | `app/page.tsx` currently only renders `Hello, iMovie`       |
+| Home page visual composition | Not yet applied | `app/page.tsx` currently only renders `Home`                |
 
 The fonts are loaded with `next/font/google`, so use the Tailwind classes and utilities below instead of importing fonts inside components.
 
@@ -33,19 +33,19 @@ The fonts are loaded with `next/font/google`, so use the Tailwind classes and ut
 
 ### Direct Editorial Tokens
 
-Use these for intentional, cinematic surfaces and accents:
+Use the canonical names below for intentional, cinematic surfaces and accents. The shorter names are compatibility aliases already exposed by `app/globals.css`.
 
-| Token     | Tailwind class    | Hex       | Use                           |
-| --------- | ----------------- | --------- | ----------------------------- |
-| Ink       | `bg-ink`          | `#0C1114` | App canvas                    |
-| Reel      | `bg-reel`         | `#141C20` | Cards, inputs, poster backing |
-| Raised    | `bg-raised`       | `#1C282D` | Hover, menus, overlays        |
-| Hairline  | `border-hairline` | `#2A3A40` | Dividers and card borders     |
-| Bone      | `text-bone`       | `#EDE8DC` | Main copy and headings        |
-| Fog       | `text-fog`        | `#9BA9A8` | Secondary copy and metadata   |
-| Vermilion | `bg-vermilion`    | `#FF5B3A` | Primary actions and focus     |
-| Brass     | `text-brass`      | `#D9A441` | Scores, awards, recognition   |
-| Sea-glass | `text-sea-glass`  | `#5FD3B3` | Watchlist and success states  |
+| Token     | Canonical class          | Alias             | Hex       | Use                           |
+| --------- | ------------------------ | ----------------- | --------- | ----------------------------- |
+| Ink       | `bg-surface-ink`         | `bg-ink`          | `#0C1114` | App canvas                    |
+| Reel      | `bg-surface-reel`        | `bg-reel`         | `#141C20` | Cards, inputs, poster backing |
+| Raised    | `bg-surface-raised`      | `bg-raised`       | `#1C282D` | Hover, menus, overlays        |
+| Hairline  | `border-border-hairline` | `border-hairline` | `#2A3A40` | Dividers and card borders     |
+| Bone      | `text-content-bone`      | `text-bone`       | `#EDE8DC` | Main copy and headings        |
+| Fog       | `text-content-fog`       | `text-fog`        | `#9BA9A8` | Secondary copy and metadata   |
+| Vermilion | `bg-brand-vermilion`     | `bg-vermilion`    | `#FF5B3A` | Primary actions and focus     |
+| Brass     | `text-brand-brass`       | `text-brass`      | `#D9A441` | Scores, awards, recognition   |
+| Sea-glass | `text-brand-seaglass`    | `text-sea-glass`  | `#5FD3B3` | Watchlist and success states  |
 
 Examples:
 
@@ -82,18 +82,29 @@ Available semantic classes include:
 
 Prefer semantic tokens inside shared components. Prefer direct editorial tokens when the visual role is specifically cinematic, such as a brass score or vermilion ticket button.
 
+Additional direct tokens cover `brand-*-hover`, `brand-*-muted`, `brand-*-border`, `status-error`, `status-success`, `status-warning`, `content-warm`, `border-outline`, and `border-strong`.
+
 ## Typography
 
 ### Utility Classes
 
-| Utility              | Font           | Use                                       |
-| -------------------- | -------------- | ----------------------------------------- |
-| `font-serif`         | Newsreader     | Editorial display and headings            |
-| `font-sans`          | Work Sans      | Body copy and interface text              |
-| `font-mono`          | JetBrains Mono | Technical data and metadata               |
-| `editorial-display`  | Newsreader     | Large hero or feature title               |
-| `editorial-headline` | Newsreader     | Film titles and section headings          |
-| `metadata`           | JetBrains Mono | Uppercase runtime, year, rating, and tags |
+| Utility                | Font           | Use                                       |
+| ---------------------- | -------------- | ----------------------------------------- |
+| `font-serif`           | Newsreader     | Editorial display and headings            |
+| `font-sans`            | Work Sans      | Body copy and interface text              |
+| `font-mono`            | JetBrains Mono | Technical data and metadata               |
+| `editorial-display`    | Newsreader     | Large hero or feature title               |
+| `editorial-headline`   | Newsreader     | Film titles and section headings          |
+| `metadata`             | JetBrains Mono | Uppercase runtime, year, rating, and tags |
+| `text-display-hero`    | Newsreader     | 56px display title with 60px line height  |
+| `text-headline-lg`     | Newsreader     | 40px heading with 48px line height        |
+| `text-headline-md`     | Newsreader     | 28px heading with 36px line height        |
+| `text-headline-sm`     | Newsreader     | 22px heading with 28px line height        |
+| `text-title-editorial` | Newsreader     | 18px title with 24px line height          |
+| `text-body-lg`         | Work Sans      | 18px body text with 28px line height      |
+| `text-body-md`         | Work Sans      | 15px body text with 24px line height      |
+| `text-body-sm`         | Work Sans      | 13px body text with 20px line height      |
+| `text-label-mono`      | JetBrains Mono | 12px label with 0.04em tracking           |
 
 Examples:
 
@@ -105,6 +116,8 @@ Examples:
 ```
 
 Keep display typography in Newsreader and interface controls in Work Sans. Do not use mono for paragraphs.
+
+Mobile display and large-headline values are available as `text-display-hero-mobile` and `text-headline-lg-mobile`.
 
 ## Film Components
 
@@ -202,6 +215,7 @@ A useful page shell:
 - Keep body text at readable contrast against ink and reel surfaces.
 - Use `poster-lift` instead of adding custom hover transforms.
 - Reduced-motion users automatically receive no poster transition.
+- `tw-animate-css` is imported globally for shadcn animation utilities; keep custom motion purposeful and respect `prefers-reduced-motion`.
 
 ## Recommended Workflow
 
@@ -212,6 +226,8 @@ A useful page shell:
 5. Reserve vermilion for primary actions and brass for recognition.
 6. Check mobile wrapping, keyboard focus, poster alt text, and reduced motion.
 7. Run `pnpm lint` and `pnpm build` before finishing.
+
+Semantic shadcn tokens are HSL-backed, while cinematic tokens are hex-backed. Keep semantic tokens for reusable component states and cinematic tokens for editorial art direction.
 
 ## Source Files
 
