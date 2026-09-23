@@ -5,7 +5,7 @@ async function getGenres(mediaType: "movie" | "tv") {
   const path = mediaType === "movie" ? "/genre/movie/list" : "/genre/tv/list";
   const data = await tmdbFetch<GenreListResponse>(path, { language: "en-US" });
 
-  return data.genres;
+  return data;
 }
 
 export { getGenres };
