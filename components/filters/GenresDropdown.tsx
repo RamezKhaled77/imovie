@@ -12,11 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-type Genre = {
-  id: number;
-  name: string;
-};
+import { Genre } from "@/lib/tmdb/types";
 
 function GenreMenu({ label, genres }: { label: string; genres: Genre[] }) {
   return (
@@ -51,9 +47,6 @@ function GenreMenu({ label, genres }: { label: string; genres: Genre[] }) {
               className="flex cursor-pointer items-center justify-between font-medium rounded-md px-2 py-1.5 text-sm text-content-bone focus:bg-surface-raised focus:text-brand-vermilion"
             >
               <span>{genre.name}</span>
-              <span className="text-[10px] uppercase tracking-[0.12em] text-content-fog">
-                {genre.id}
-              </span>
             </DropdownMenuItem>
           ))}
         </DropdownMenuGroup>
