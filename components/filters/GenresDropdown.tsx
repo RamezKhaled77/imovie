@@ -12,13 +12,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Genre } from "@/lib/tmdb/types";
+import Link from "next/link";
 
-type Genre = {
-  id: number;
-  name: string;
-};
-
-function GenreMenu({ label, genres }: { label: string; genres: Genre[] }) {
+function GenreMenu({
+  basePath,
+  label,
+  genres,
+}: {
+  basePath: string;
+  label: string;
+  genres: Genre[];
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -49,12 +54,10 @@ function GenreMenu({ label, genres }: { label: string; genres: Genre[] }) {
             <DropdownMenuItem
               key={genre.id}
               className="flex cursor-pointer items-center justify-between font-medium rounded-md px-2 py-1.5 text-sm text-content-bone focus:bg-surface-raised focus:text-brand-vermilion"
-            >
-              <span>{genre.name}</span>
-              <span className="text-[10px] uppercase tracking-[0.12em] text-content-fog">
-                {genre.id}
-              </span>
-            </DropdownMenuItem>
+              render={
+                <Link href={`${basePath}?genre=${genre.id}`}>{genre.name}</Link>
+              }
+            />
           ))}
         </DropdownMenuGroup>
       </DropdownMenuContent>
@@ -71,8 +74,8 @@ export default function GenresDropdown({
 }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <GenreMenu label="Movie Genres" genres={movieGenres} />
-      <GenreMenu label="TV Genres" genres={tvGenres} />
+      <GenreMenu basePath="/movies" label="Movie Genres" genres={movieGenres} />
+      <GenreMenu basePath="/tv" label="TV Genres" genres={tvGenres} />
     </div>
   );
 }
