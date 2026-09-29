@@ -14,63 +14,8 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { getGenres } from "@/lib/tmdb/genres";
 import NavMenuMobile from "./NavMenuMobile";
-
-const primaryMenu = {
-  Movies: [
-    { name: "Popular", endPoint: "popular" },
-    { name: "Now Playing", endPoint: "now_playing" },
-    { name: "Top Rated", endPoint: "top_rated" },
-    { name: "Upcoming", endPoint: "upcoming" },
-  ],
-  "TV Shows": [
-    { name: "Popular", endPoint: "popular" },
-    { name: "On The Air", endPoint: "on_the_air" },
-    { name: "Top Rated", endPoint: "top_rated" },
-    { name: "Airing Today", endPoint: "airing_today" },
-  ],
-};
-
-function NavDropdown({
-  label,
-  items,
-}: {
-  label: string;
-  items: { name: string; endPoint: string }[];
-}) {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        render={
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-9 gap-1.5 rounded-md border border-transparent bg-transparent px-2.5 !text-base !font-medium !font-mono text-content-bone hover:border-border-hairline hover:bg-surface-raised hover:text-brand-vermilion data-[popup-open=true]:border-brand-vermilion/40 data-[popup-open=true]:bg-brand-vermilion/5"
-          />
-        }
-      >
-        <span className="flex items-center gap-1.5">
-          {label}
-          <ChevronDown className="h-3.5 w-3.5 text-content-fog" />
-        </span>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align="start"
-        className="min-w-[200px] rounded-lg border border-border-hairline bg-surface-reel p-2 text-content-bone shadow-2xl"
-      >
-        <DropdownMenuGroup>
-          {items.map((item) => (
-            <DropdownMenuItem
-              key={item.name}
-              className="cursor-pointer rounded-md px-2 py-1.5 text-sm text-content-bone font-medium focus:bg-surface-raised focus:text-brand-vermilion"
-            >
-              {item.name}
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
+import { primaryMenu } from "@/lib/constants";
+import NavDropdown from "./NavDropdown";
 
 export default async function Navbar() {
   const [movieGenresRes, tvGenresRes] = await Promise.all([
@@ -99,8 +44,16 @@ export default async function Navbar() {
               <GenresDropdown movieGenres={movieGenres} tvGenres={tvGenres} />
             </div>
             <div className="flex items-center gap-1">
-              <NavDropdown label="Movies" items={primaryMenu.Movies} />
-              <NavDropdown label="Tv Shows" items={primaryMenu["TV Shows"]} />
+              <NavDropdown
+                basePath="/movies"
+                label="Movies"
+                items={primaryMenu.Movies}
+              />
+              <NavDropdown
+                basePath="/tv"
+                label="Tv Shows"
+                items={primaryMenu["TV Shows"]}
+              />
 
               <Link
                 href="/actors"
