@@ -90,7 +90,7 @@ export default function TrendingSection() {
       aria-labelledby="trending-heading"
       className="border-b border-border-hairline bg-surface-ink py-8 sm:py-10"
     >
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-8 lg:px-8">
         <Carousel
           opts={{ align: "start", loop: true }}
           aria-label="Trending films this week"

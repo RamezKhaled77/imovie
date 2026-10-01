@@ -31,7 +31,7 @@ export default function HomeHero() {
         className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(12,17,20,0.98)_0%,rgba(12,17,20,0.88)_34%,rgba(12,17,20,0.48)_70%,rgba(12,17,20,0.3)_100%),linear-gradient(0deg,#0c1114_0%,rgba(12,17,20,0.2)_48%,rgba(12,17,20,0.38)_100%)]"
       />
 
-      <div className="mx-auto w-full max-w-[1440px] px-4 py-20 sm:px-8 md:py-24 lg:px-12">
+      <div className="mx-auto w-full max-w-[1600px] px-4 py-20 sm:px-8 md:py-24 lg:px-8">
         <div className="max-w-[760px]">
           <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
             <span className="inline-flex items-center gap-2 rounded-sm border border-brand-vermilion-border bg-brand-vermilion-muted px-3 py-1.5 font-mono text-[11px] font-semibold uppercase text-brand-vermilion">
