@@ -8,9 +8,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-## MATINÉE project guidance
+## iMovie project guidance
 
-MATINÉE is a learning-focused movie, TV show, and actor discovery app using Next.js 16 App Router, TypeScript, Tailwind CSS, and the TMDB API. The app has TMDB login only; it does not have sign-up, a database, or an auth library.
+iMovie is a learning-focused movie, TV show, and actor discovery app using Next.js 16 App Router, TypeScript, Tailwind CSS, and the TMDB API. The app has TMDB login only; it does not have sign-up, a database, or an auth library.
 
 ## Read first
 

@@ -250,3 +250,5 @@ Geometry is structured, architectural, and tactile. High-radius organic pills an
 ### 6. Festival Program Row (Specialty Component)
 
 - Horizontal continuous carousel bounded by a top and bottom 1px `Hairline` divider. Contains movie index (`01`, `02`, `03` in `label-mono-xs`), release year, title in italic serif, and duration.
+
+and if you need any new component make the shadcn high usage priority

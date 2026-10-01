@@ -1,7 +1,9 @@
-export default async function Home() {
-  // const movies = await getTrendingMovies();
-  // const movieGenres = await getGenres("movie");
-  // const tvGenres = await getGenres("tv");
+import HomeHero from "@/components/home/HomeHero";
 
-  return <div className="editorial-display flex flex-col gap-3">Home</div>;
+export default async function Home() {
+  return (
+    <main className="flex flex-1 flex-col">
+      <HomeHero />
+    </main>
+  );
 }

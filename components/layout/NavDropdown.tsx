@@ -1,4 +1,4 @@
-"use";
+"use client";
 
 import { ChevronDown } from "lucide-react";
 import { Button } from "../ui/button";
