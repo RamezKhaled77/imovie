@@ -17,7 +17,7 @@ const featuredFilm = {
 
 export default function HomeHero() {
   return (
-    <section className="relative isolate flex flex-1 items-center overflow-hidden border-b border-border-hairline bg-surface-ink">
+    <section className="relative isolate flex min-h-[calc(100svh-65px)] flex-none items-center overflow-hidden border-b border-border-hairline bg-surface-ink lg:min-h-[calc(100svh-73px)]">
       <Image
         src="/hero-img.jpg"
         alt=""
