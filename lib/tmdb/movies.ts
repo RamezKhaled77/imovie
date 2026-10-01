@@ -7,4 +7,10 @@ async function getTrendingMovies() {
   return data;
 }
 
-export { getTrendingMovies };
+async function getPopularMovies() {
+  const data = await tmdbFetch<MovieListResponse>("/movie/popular");
+
+  return data;
+}
+
+export { getTrendingMovies, getPopularMovies };

@@ -1,8 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { Star } from "lucide-react";
-
 import {
   Carousel,
   CarouselContent,
@@ -10,63 +7,80 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import MovieCard from "@/components/home/MovieCard";
 
 const trendingFilms = [
   {
     title: "Past Lives",
+    id: 1,
     year: 2023,
     runtime: "106 min",
-    languages: "USA / KR",
+    detail: "USA / KR",
     rating: "8.4",
+    image: "/trending-card-img.jpg",
   },
   {
     title: "Poor Things",
+    id: 2,
     year: 2023,
     runtime: "141 min",
-    languages: "IRL / UK",
+    detail: "IRL / UK",
     rating: "8.1",
+    image: "/trending-card-img.jpg",
   },
   {
     title: "The Zone of Interest",
+    id: 3,
     year: 2023,
     runtime: "105 min",
-    languages: "UK / PL",
+    detail: "UK / PL",
     rating: "7.8",
+    image: "/trending-card-img.jpg",
   },
   {
     title: "Killers of the Flower Moon",
+    id: 4,
     year: 2023,
     runtime: "206 min",
-    languages: "USA",
+    detail: "USA",
     rating: "7.9",
+    image: "/trending-card-img.jpg",
   },
   {
     title: "The Holdovers",
+    id: 5,
     year: 2023,
     runtime: "133 min",
-    languages: "USA",
+    detail: "USA",
     rating: "8.0",
+    image: "/trending-card-img.jpg",
   },
   {
     title: "Perfect Days",
+    id: 6,
     year: 2023,
     runtime: "124 min",
-    languages: "JP / DE",
+    detail: "JP / DE",
     rating: "7.9",
+    image: "/trending-card-img.jpg",
   },
   {
     title: "Anatomy of a Fall",
+    id: 7,
     year: 2023,
     runtime: "151 min",
-    languages: "FR / EN",
+    detail: "FR / EN",
     rating: "7.7",
+    image: "/trending-card-img.jpg",
   },
   {
     title: "Oppenheimer",
+    id: 8,
     year: 2023,
     runtime: "180 min",
-    languages: "USA / UK",
+    detail: "USA / UK",
     rating: "8.1",
+    image: "/trending-card-img.jpg",
   },
 ];
 
@@ -111,32 +125,7 @@ export default function TrendingSection() {
                 key={film.title}
                 className="basis-[76%] pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
               >
-                <article className="overflow-hidden rounded-sm border border-border-hairline bg-surface-reel">
-                  <div className="relative aspect-[2/3] overflow-hidden bg-surface-raised">
-                    <Image
-                      src="/trending-card-img.jpg"
-                      alt=""
-                      fill
-                      sizes="(max-width: 640px) 76vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 17vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                    <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-sm border border-brand-brass-border bg-surface-ink/90 px-2 py-1 font-mono text-xs font-semibold text-brand-brass">
-                      <Star
-                        aria-hidden="true"
-                        className="size-3 fill-current"
-                      />
-                      {film.rating}
-                    </span>
-                  </div>
-                  <div className="min-h-[76px] px-3 py-2.5">
-                    <h3 className="truncate font-headline text-title-editorial text-content-bone">
-                      {film.title}
-                    </h3>
-                    <p className="metadata mt-1.5 truncate text-[10px] text-content-warm">
-                      {film.year} · {film.runtime} · {film.languages}
-                    </p>
-                  </div>
-                </article>
+                <MovieCard movie={film} />
               </CarouselItem>
             ))}
           </CarouselContent>
