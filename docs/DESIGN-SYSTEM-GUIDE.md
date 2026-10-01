@@ -82,6 +82,12 @@ Available semantic classes include:
 
 Prefer semantic tokens inside shared components. Prefer direct editorial tokens when the visual role is specifically cinematic, such as a brass score or vermilion ticket button.
 
+### Component Priority
+
+Use the local shadcn components in `components/ui/` for every reusable interactive control before writing native control markup. This includes `Button`, `Input`, dropdown menus, navigation menus, popovers, sheets, tabs, checkboxes, dialogs, and toast feedback. Keep native elements for semantic structure and platform primitives with no project component equivalent, such as `form`, `label`, and links.
+
+When a needed shadcn primitive is missing, add the component through the shadcn workflow and keep its API and styles in `components/ui/`. Do not recreate a button or input with a styled native element in a feature component.
+
 Additional direct tokens cover `brand-*-hover`, `brand-*-muted`, `brand-*-border`, `status-error`, `status-success`, `status-warning`, `content-warm`, `border-outline`, and `border-strong`.
 
 ## Typography
@@ -170,13 +176,15 @@ Use `film-rule` for festival rails and editorial section boundaries:
 ## Buttons and States
 
 ```tsx
-<button className="rounded bg-vermilion px-4 py-3 font-mono text-xs font-medium uppercase tracking-wide text-ink">
-  Play trailer
-</button>
+import { Button } from "@/components/ui/button";
 
-<button className="rounded border border-hairline px-4 py-3 font-mono text-xs uppercase tracking-wide text-bone hover:bg-raised">
+<Button className="rounded bg-vermilion px-4 py-3 font-mono text-xs font-medium uppercase tracking-wide text-ink">
+  Play trailer
+</Button>
+
+<Button variant="outline" className="rounded border border-hairline px-4 py-3 font-mono text-xs uppercase tracking-wide text-bone hover:bg-raised">
   Add to watchlist
-</button>
+</Button>
 
 <span className="rounded border border-brass/30 bg-brass/10 px-2 py-1 metadata text-brass">
   92 / 100
@@ -221,11 +229,12 @@ A useful page shell:
 
 1. Start each screen with `bg-ink text-bone`.
 2. Define the layout grid and poster ratios before styling details.
-3. Use semantic shadcn tokens inside shared components.
-4. Add `editorial-headline` to film titles and `metadata` to technical facts.
-5. Reserve vermilion for primary actions and brass for recognition.
-6. Check mobile wrapping, keyboard focus, poster alt text, and reduced motion.
-7. Run `pnpm lint` and `pnpm build` before finishing.
+3. Use the local shadcn component before writing any reusable interactive control.
+4. Use semantic shadcn tokens inside shared components.
+5. Add `editorial-headline` to film titles and `metadata` to technical facts.
+6. Reserve vermilion for primary actions and brass for recognition.
+7. Check mobile wrapping, keyboard focus, poster alt text, and reduced motion.
+8. Run `pnpm lint` and `pnpm build` before finishing.
 
 Semantic shadcn tokens are HSL-backed, while cinematic tokens are hex-backed. Keep semantic tokens for reusable component states and cinematic tokens for editorial art direction.
 

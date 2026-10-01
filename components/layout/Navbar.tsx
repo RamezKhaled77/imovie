@@ -1,13 +1,6 @@
-import { Bookmark, ChevronDown, Search, UserRound } from "lucide-react";
+import { Bookmark, Search, UserRound } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import GenresDropdown from "@/components/filters/GenresDropdown";
 import Link from "next/link";
 import { Label } from "../ui/label";
@@ -74,15 +67,15 @@ export default async function Navbar() {
               />
             </Label>
 
-            <button
+            <Button
               type="button"
               aria-label="Saved items"
               className="flex h-9 w-11 items-center justify-center rounded-lg border border-border-hairline bg-surface-raised text-content-bone transition-colors hover:border-brand-vermilion/50 hover:text-brand-vermilion"
             >
               <Bookmark className="h-4 w-4" />
-            </button>
+            </Button>
 
-            <button
+            <Button
               type="button"
               className="inline-flex items-center gap-2 rounded-lg border border-border-hairline bg-surface-raised px-4 py-1 h-9 text-sm font-medium text-content-bone transition-colors hover:border-brand-vermilion/50 hover:text-brand-vermilion"
             >
@@ -90,7 +83,7 @@ export default async function Navbar() {
                 <UserRound className="h-4 w-4" />
               </span>
               Log in with TMDB
-            </button>
+            </Button>
           </div>
           <NavMenuMobile movieGenres={movieGenres} tvGenres={tvGenres} />
         </div>

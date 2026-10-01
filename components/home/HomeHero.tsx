@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { BookmarkPlus, CirclePlay, Star, Ticket } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const featuredFilm = {
   title: "Anatomy of a Fall",
@@ -83,27 +84,27 @@ export default function HomeHero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <button
+            <Button
               type="button"
               className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-brand-vermilion px-5 font-mono text-xs font-semibold uppercase text-surface-ink transition-colors hover:bg-brand-vermilion-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-vermilion"
             >
               <Ticket aria-hidden="true" className="size-4" />
               View Details
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               className="inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-border-hairline bg-surface-reel/70 px-5 font-mono text-xs uppercase text-content-bone transition-colors hover:border-border-strong hover:bg-surface-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-vermilion"
             >
               <BookmarkPlus aria-hidden="true" className="size-4" />
               Add to Watchlist
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               className="inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-border-hairline bg-surface-ink/60 px-5 font-mono text-xs uppercase text-content-warm transition-colors hover:border-border-strong hover:bg-surface-raised hover:text-content-bone focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-vermilion"
             >
               <CirclePlay aria-hidden="true" className="size-4" />
               Watch Trailer
-            </button>
+            </Button>
           </div>
         </div>
       </div>

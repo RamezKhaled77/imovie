@@ -38,7 +38,9 @@ export default function NavMenuMobile({
 
   return (
     <>
-      <button
+      <Button
+        variant="outline"
+        size="icon"
         type="button"
         aria-label={
           mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
@@ -51,7 +53,7 @@ export default function NavMenuMobile({
         ) : (
           <Menu className="h-4 w-4" />
         )}
-      </button>
+      </Button>
 
       {mobileMenuOpen && (
         <div className="flex flex-col gap-2 lg:hidden">
@@ -105,23 +107,25 @@ export default function NavMenuMobile({
           </Label>
 
           <div className="flex items-center justify-between gap-2">
-            <button
+            <Button
               type="button"
+              variant="outline"
               className="inline-flex items-center gap-2 rounded-md border border-border-hairline bg-surface-raised px-3 py-2 text-sm text-content-bone"
             >
               <Bookmark className="h-4 w-4" />
               Watchlist
-            </button>
+            </Button>
 
-            <button
+            <Button
               type="button"
+              variant="outline"
               className="inline-flex items-center gap-2 rounded-md border border-border-hairline bg-surface-raised px-3 py-2 text-sm font-medium text-content-bone"
             >
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-vermilion/10 text-brand-vermilion">
                 <UserRound className="h-3.5 w-3.5" />
               </span>
               Log in
-            </button>
+            </Button>
           </div>
         </div>
       )}
