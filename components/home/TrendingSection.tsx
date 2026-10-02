@@ -8,83 +8,11 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import MovieCard from "@/components/home/MovieCard";
+import { MovieListResponse } from "@/lib/tmdb/types";
 
-const trendingFilms = [
-  {
-    title: "Past Lives",
-    id: 1,
-    year: 2023,
-    runtime: "106 min",
-    detail: "USA / KR",
-    rating: "8.4",
-    image: "/trending-card-img.jpg",
-  },
-  {
-    title: "Poor Things",
-    id: 2,
-    year: 2023,
-    runtime: "141 min",
-    detail: "IRL / UK",
-    rating: "8.1",
-    image: "/trending-card-img.jpg",
-  },
-  {
-    title: "The Zone of Interest",
-    id: 3,
-    year: 2023,
-    runtime: "105 min",
-    detail: "UK / PL",
-    rating: "7.8",
-    image: "/trending-card-img.jpg",
-  },
-  {
-    title: "Killers of the Flower Moon",
-    id: 4,
-    year: 2023,
-    runtime: "206 min",
-    detail: "USA",
-    rating: "7.9",
-    image: "/trending-card-img.jpg",
-  },
-  {
-    title: "The Holdovers",
-    id: 5,
-    year: 2023,
-    runtime: "133 min",
-    detail: "USA",
-    rating: "8.0",
-    image: "/trending-card-img.jpg",
-  },
-  {
-    title: "Perfect Days",
-    id: 6,
-    year: 2023,
-    runtime: "124 min",
-    detail: "JP / DE",
-    rating: "7.9",
-    image: "/trending-card-img.jpg",
-  },
-  {
-    title: "Anatomy of a Fall",
-    id: 7,
-    year: 2023,
-    runtime: "151 min",
-    detail: "FR / EN",
-    rating: "7.7",
-    image: "/trending-card-img.jpg",
-  },
-  {
-    title: "Oppenheimer",
-    id: 8,
-    year: 2023,
-    runtime: "180 min",
-    detail: "USA / UK",
-    rating: "8.1",
-    image: "/trending-card-img.jpg",
-  },
-];
+export default function TrendingSection({ data }: { data: MovieListResponse }) {
+  const moviesList = data.results;
 
-export default function TrendingSection() {
   return (
     <section
       aria-labelledby="trending-heading"
@@ -120,10 +48,10 @@ export default function TrendingSection() {
           </div>
 
           <CarouselContent className="-ml-4">
-            {trendingFilms.map((film) => (
+            {moviesList.map((film) => (
               <CarouselItem
-                key={film.title}
-                className="basis-[76%] pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+                key={film.id}
+                className="basis-[76%] pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
               >
                 <MovieCard movie={film} />
               </CarouselItem>
