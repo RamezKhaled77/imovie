@@ -2,7 +2,7 @@ import Image from "next/image";
 import { BookmarkPlus, CirclePlay, Star, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const featuredFilm = {
+const heroData = {
   title: "Anatomy of a Fall",
   year: 2023,
   runtime: "151 min",
@@ -36,39 +36,37 @@ export default function HomeHero() {
           <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
             <span className="inline-flex items-center gap-2 rounded-sm border border-brand-vermilion-border bg-brand-vermilion-muted px-3 py-1.5 font-mono text-[11px] font-semibold uppercase text-brand-vermilion">
               <Ticket aria-hidden="true" className="size-3.5" />
-              {featuredFilm.awards}
+              {heroData.awards}
             </span>
             <span className="metadata text-content-warm">
-              {featuredFilm.distinction}
+              {heroData.distinction}
             </span>
           </div>
 
           <h1 className="editorial-display text-display-hero-mobile text-content-bone md:text-display-hero [letter-spacing:0]">
-            {featuredFilm.title}
+            {heroData.title}
           </h1>
 
           <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span className="metadata text-content-warm">{heroData.year}</span>
+            <span aria-hidden="true" className="text-brand-vermilion">
+              ·
+            </span>
             <span className="metadata text-content-warm">
-              {featuredFilm.year}
+              {heroData.runtime}
             </span>
             <span aria-hidden="true" className="text-brand-vermilion">
               ·
             </span>
             <span className="metadata text-content-warm">
-              {featuredFilm.runtime}
-            </span>
-            <span aria-hidden="true" className="text-brand-vermilion">
-              ·
-            </span>
-            <span className="metadata text-content-warm">
-              {featuredFilm.languages}
+              {heroData.languages}
             </span>
             <span className="inline-flex items-center gap-1 rounded-sm border border-brand-brass-border bg-brand-brass-muted px-2 py-1 font-mono text-xs font-semibold text-brand-brass">
               <Star aria-hidden="true" className="size-3.5 fill-current" />
-              {featuredFilm.rating}
+              {heroData.rating}
             </span>
             <div className="flex flex-wrap gap-2">
-              {featuredFilm.genres.map((genre) => (
+              {heroData.genres.map((genre) => (
                 <span
                   key={genre}
                   className="rounded-sm border border-border-hairline bg-surface-reel/80 px-2 py-1 font-mono text-[10px] uppercase text-content-fog"
@@ -80,7 +78,7 @@ export default function HomeHero() {
           </div>
 
           <p className="mt-6 max-w-[690px] text-base leading-[1.8] text-content-warm sm:text-lg">
-            {featuredFilm.overview}
+            {heroData.overview}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
