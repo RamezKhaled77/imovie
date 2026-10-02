@@ -3,16 +3,16 @@ import { BookmarkPlus, CirclePlay, Star, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const heroData = {
-  title: "Anatomy of a Fall",
-  year: 2023,
-  runtime: "151 min",
-  languages: "FR / EN / DE",
-  rating: "8.2",
-  awards: "Critics' Selection · Archive 2024",
-  distinction: "Palme d'Or winner",
+  title: "Find your next favorite",
+  firstCategory: "Movies",
+  secondCategory: "TV Shows",
+  thirdCategory: "Actors",
+  highlight: "Stories for every mood",
+  eyebrow: "Your guide to what is worth watching",
+  distinction: "Discover · Explore · Keep track",
   overview:
-    "A woman is suspected of her husband's murder, and their blind son faces a moral dilemma as the sole witness in a secluded courtroom trial in the French Alps.",
-  genres: ["Crime", "Drama", "Mystery"],
+    "Explore memorable movies, compelling series, and the people behind them. Find something new to watch, revisit a favorite, and keep your watchlist close.",
+  topics: ["Trending", "Top Rated", "New Releases"],
 };
 
 export default function HomeHero() {
@@ -36,7 +36,7 @@ export default function HomeHero() {
           <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
             <span className="inline-flex items-center gap-2 rounded-sm border border-brand-vermilion-border bg-brand-vermilion-muted px-3 py-1.5 font-mono text-[11px] font-semibold uppercase text-brand-vermilion">
               <Ticket aria-hidden="true" className="size-3.5" />
-              {heroData.awards}
+              {heroData.eyebrow}
             </span>
             <span className="metadata text-content-warm">
               {heroData.distinction}
@@ -48,30 +48,32 @@ export default function HomeHero() {
           </h1>
 
           <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span className="metadata text-content-warm">{heroData.year}</span>
+            <span className="metadata text-content-warm">
+              {heroData.firstCategory}
+            </span>
             <span aria-hidden="true" className="text-brand-vermilion">
               ·
             </span>
             <span className="metadata text-content-warm">
-              {heroData.runtime}
+              {heroData.secondCategory}
             </span>
             <span aria-hidden="true" className="text-brand-vermilion">
               ·
             </span>
             <span className="metadata text-content-warm">
-              {heroData.languages}
+              {heroData.thirdCategory}
             </span>
             <span className="inline-flex items-center gap-1 rounded-sm border border-brand-brass-border bg-brand-brass-muted px-2 py-1 font-mono text-xs font-semibold text-brand-brass">
               <Star aria-hidden="true" className="size-3.5 fill-current" />
-              {heroData.rating}
+              {heroData.highlight}
             </span>
             <div className="flex flex-wrap gap-2">
-              {heroData.genres.map((genre) => (
+              {heroData.topics.map((topic) => (
                 <span
-                  key={genre}
+                  key={topic}
                   className="rounded-sm border border-border-hairline bg-surface-reel/80 px-2 py-1 font-mono text-[10px] uppercase text-content-fog"
                 >
-                  {genre}
+                  {topic}
                 </span>
               ))}
             </div>
@@ -87,7 +89,7 @@ export default function HomeHero() {
               className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-brand-vermilion px-5 font-mono text-xs font-semibold uppercase text-surface-ink transition-colors hover:bg-brand-vermilion-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-vermilion"
             >
               <Ticket aria-hidden="true" className="size-4" />
-              View Details
+              Explore Movies
             </Button>
             <Button
               type="button"
@@ -101,7 +103,7 @@ export default function HomeHero() {
               className="inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-border-hairline bg-surface-ink/60 px-5 font-mono text-xs uppercase text-content-warm transition-colors hover:border-border-strong hover:bg-surface-raised hover:text-content-bone focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-vermilion"
             >
               <CirclePlay aria-hidden="true" className="size-4" />
-              Watch Trailer
+              Explore Trending
             </Button>
           </div>
         </div>
