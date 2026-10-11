@@ -19,17 +19,15 @@ export default function MovieCard({ movie }: { movie: Movie }) {
         className="block overflow-hidden rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-vermilion"
       >
         <div className="relative aspect-[2/3] overflow-hidden bg-surface-raised">
-          {posterUrl ? (
+         
             <Image
-              src={posterUrl}
+              src={posterUrl ? posterUrl : "/movie-card-placeholder.jpg"}
               alt={`${movie.title} film artwork`}
               fill
               sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 16vw"
               className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
-          ) : (
-            <div>No Poster Available</div>
-          )}
+        
           <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-sm border border-brand-brass-border bg-surface-ink/90 px-2 py-1 font-mono text-xs font-semibold text-brand-brass">
             <Star aria-hidden="true" className="size-3 fill-current" />
             {movie.vote_average?.toFixed(1)}
