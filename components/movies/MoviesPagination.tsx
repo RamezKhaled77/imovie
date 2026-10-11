@@ -15,7 +15,7 @@ export default function MoviesPagination({
   page: number;
   totalPages: number;
 }) {
-  if (totalPages <= 1) {
+  if (totalPages <= 1 || page > totalPages) {
     return null;
   }
 

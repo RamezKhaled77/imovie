@@ -1,9 +1,7 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import MovieCard from "@/components/home/MovieCard";
+import MoviesEmptyState from "@/components/movies/MoviesEmptyState";
 import type { MovieCategory } from "@/lib/tmdb/movies";
 import type { Movie } from "@/lib/tmdb/types";
-import { getMoviesHref } from "./movies-page-utils";
 
 export default function MoviesResults({
   category,
@@ -56,28 +54,12 @@ export default function MoviesResults({
           ))}
         </div>
       ) : (
-        <div className="border border-border-hairline bg-surface-reel px-5 py-12 text-center">
-          <h2 className="font-headline text-headline-sm text-content-bone">
-            No films found
-          </h2>
-          <p className="mx-auto mt-2 max-w-prose text-sm text-content-fog">
-            {page > totalPages
-              ? "This page is beyond the available results. Choose a page below or adjust your filters."
-              : genreIds.length > 0
-                ? "No films match every selected genre. Try removing a genre filter."
-                : "There are no films to show in this category right now."}
-          </p>
-          {genreIds.length > 0 && (
-            <Button
-              variant="outline"
-              size="sm"
-              className="mt-5 rounded-sm border-border-hairline bg-transparent font-mono text-[10px] uppercase tracking-wide text-content-bone hover:bg-surface-raised"
-              render={<Link href={getMoviesHref(category, [])} />}
-            >
-              Clear genre filters
-            </Button>
-          )}
-        </div>
+        <MoviesEmptyState
+          category={category}
+          genreIds={genreIds}
+          page={page}
+          totalPages={totalPages}
+        />
       )}
     </>
   );
