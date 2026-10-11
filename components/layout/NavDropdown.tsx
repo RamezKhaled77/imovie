@@ -44,7 +44,7 @@ export default function NavDropdown({
           {items.map((item) => (
             <DropdownMenuItem
               key={item.endPoint}
-              render={<Link href={`${basePath}/${item.endPoint}`} />}
+              render={<Link href={`${basePath}${item.endPoint}`} />}
               className="rounded-sm px-3 py-2 text-sm font-mono text-content-bone transition-colors hover:bg-surface-raised hover:text-brand-vermilion"
             >
               {item.name}
