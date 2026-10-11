@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import Link from "next/link";
 
 export default function NavDropdown({
   basePath,
@@ -42,9 +43,9 @@ export default function NavDropdown({
         <DropdownMenuGroup>
           {items.map((item) => (
             <DropdownMenuItem
-              onClick={() => {}}
-              key={item.name}
-              className="cursor-pointer rounded-md px-2 py-1.5 text-sm text-content-bone font-medium focus:bg-surface-raised focus:text-brand-vermilion"
+              key={item.endPoint}
+              render={<Link href={`${basePath}/${item.endPoint}`} />}
+              className="rounded-sm px-3 py-2 text-sm font-mono text-content-bone transition-colors hover:bg-surface-raised hover:text-brand-vermilion"
             >
               {item.name}
             </DropdownMenuItem>

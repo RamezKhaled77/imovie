@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { BookmarkPlus, CirclePlay, Star, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const heroData = {
   title: "Find your next favorite",
@@ -34,7 +35,7 @@ export default function HomeHero() {
       <div className="mx-auto w-full max-w-[1600px] px-4 py-20 sm:px-8 md:py-24 lg:px-8">
         <div className="max-w-[760px]">
           <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span className="inline-flex items-center gap-2 rounded-sm border border-brand-vermilion-border bg-brand-vermilion-muted px-3 py-1.5 font-mono text-[11px] font-semibold uppercase text-brand-vermilion">
+            <span className="inline-flex items-center gap-2 rounded-sm tracking-wider border border-brand-vermilion-border bg-brand-vermilion-muted px-3 py-1.5 font-mono text-[11px] font-semibold uppercase text-brand-vermilion">
               <Ticket aria-hidden="true" className="size-3.5" />
               {heroData.eyebrow}
             </span>
@@ -84,20 +85,14 @@ export default function HomeHero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button
-              type="button"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-brand-vermilion px-5 font-mono text-xs font-semibold uppercase text-surface-ink transition-colors hover:bg-brand-vermilion-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-vermilion"
+            <Link
+              href="/movies"
+              className="inline-flex h-11 items-center tracking-wider justify-center gap-2 rounded-sm bg-brand-vermilion px-5 font-mono text-sm font-semibold uppercase text-surface-ink transition-colors hover:bg-brand-vermilion-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-vermilion"
             >
-              <Ticket aria-hidden="true" className="size-4" />
+              <Ticket aria-hidden="true" className="size-5" />
               Explore Movies
-            </Button>
-            <Button
-              type="button"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-border-hairline bg-surface-reel/70 px-5 font-mono text-xs uppercase text-content-bone transition-colors hover:border-border-strong hover:bg-surface-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-vermilion"
-            >
-              <BookmarkPlus aria-hidden="true" className="size-4" />
-              Add to Watchlist
-            </Button>
+            </Link>
+          
             <Button
               type="button"
               className="inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-border-hairline bg-surface-ink/60 px-5 font-mono text-xs uppercase text-content-warm transition-colors hover:border-border-strong hover:bg-surface-raised hover:text-content-bone focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-vermilion"

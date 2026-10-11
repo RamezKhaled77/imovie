@@ -38,7 +38,7 @@ export default async function Navbar() {
             </div>
             <div className="flex items-center gap-1">
               <NavDropdown
-                basePath="/movies"
+                basePath="/movie"
                 label="Movies"
                 items={primaryMenu.Movies}
               />
