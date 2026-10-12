@@ -86,10 +86,10 @@ Planning baseline; open decisions gate the phases named below.
 
 **Tasks:**
 
-- [ ] Choose append vs parallel vs sequential fetches (DEC-013).
-- [ ] Choose similar vs recommendations (DEC-018).
-- [ ] Render credits, director, genres, video, companies, and similar items.
-- [ ] Add not-found and section-level partial failure behavior.
+- [x] Choose append vs parallel vs sequential fetches (DEC-013).
+- [x] Choose similar vs recommendations (DEC-018).
+- [x] Render credits, director, genres, video, companies, and similar items.
+- [x] Add not-found handling and safe fallbacks for missing optional fields.
 
 **Deliverables:** movie details route.
 
@@ -107,12 +107,12 @@ Planning baseline; open decisions gate the phases named below.
 
 **Tasks:**
 
-- [ ] Verify trending people, TV category, person, combined-credit, season, and episode endpoints.
-- [ ] Decide popularity score vs computed rank (DEC-016).
-- [ ] Build actor and TV routes with responsive rails/grids.
-- [ ] Add season/episode loading, empty, and error states.
+- [x] Verify trending people, TV category, person, combined-credit, season, and episode endpoints.
+- [x] Decide popularity score vs computed rank (DEC-016).
+- [x] Build actor and TV routes with responsive rails/grids.
+- [x] Add season/episode loading, empty, and error states.
 
-**Deliverables:** actors, actor details, TV list, TV details.
+**Deliverables:** actors, actor details, TV list, TV details, season details, and episode details.
 
 **Concept learned:** reusable Server Components and route-level not-found handling.
 

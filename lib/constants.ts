@@ -7,7 +7,7 @@ const primaryMenu = {
   ],
   "TV Shows": [
     { name: "Popular", endPoint: "popular" },
-    { name: "On The Air", endPoint: "on_the_air" },
+    { name: "On TV", endPoint: "on_the_air" },
     { name: "Top Rated", endPoint: "top_rated" },
     { name: "Airing Today", endPoint: "airing_today" },
   ],

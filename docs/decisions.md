@@ -6,7 +6,7 @@ Keep accepted technical decisions and unresolved choices explicit before code ch
 
 ## Status
 
-Accepted decisions below; 11 open decisions require owner input.
+Accepted decisions below; 8 open decisions require owner input.
 
 ## Related docs
 
@@ -45,10 +45,10 @@ Accepted decisions below; 11 open decisions require owner input.
 | Option                       | Considerations                                                                       |
 | ---------------------------- | ------------------------------------------------------------------------------------ |
 | `append_to_response`         | Fewer client-visible requests; larger combined payload and coupled failure behavior. |
-| `Promise.all` parallel calls | Failure isolation and explicit learning; more requests.                              |
+| `Promise.all` parallel calls | Explicit and fast; any failed request fails the detail page; more requests.           |
 | Sequential calls             | Easy dependency reasoning; creates waterfalls.                                       |
 
-Needed by: PH-3. Owner decision:
+Needed by: PH-3. **Accepted:** use parallel `Promise.all` calls. Required detail reads start together; if one fails, the route-level error boundary offers a retry. Optional missing fields still render intentional fallbacks. **Date:** 2026-10-12.
 
 ### DEC-014: Caching and revalidation
 
@@ -66,7 +66,7 @@ Needed by: PH-8. Owner decision:
 | Show raw TMDB popularity score | Faithful to source; users may read it as rank.            |
 | Compute/display a local rank   | Clear ordering; rank scope and stability must be defined. |
 
-Needed by: PH-4. Owner decision:
+Needed by: PH-4. **Accepted:** show the raw TMDB popularity score. **Date:** 2026-10-12.
 
 ### DEC-018: Similar vs recommendations
 
@@ -75,7 +75,7 @@ Needed by: PH-4. Owner decision:
 | Similar endpoint         | Directly matches spec wording; may be less personalized. |
 | Recommendations endpoint | Potentially richer relevance; changes semantics.         |
 
-Needed by: PH-3. Owner decision:
+Needed by: PH-3. **Accepted:** use TMDB's similar endpoint. **Date:** 2026-10-12.
 
 ### DEC-020: Callback hardening
 

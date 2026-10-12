@@ -25,9 +25,11 @@ Accepted URL-state principle, query-parameter category shape (DEC-012), and AND 
 | ------------------------- | -------------------------- | --------------------------- | --------------------------------------------------- | ------------------------------------------------- |
 | `/`                       | Latest movie discovery     | `page`                      | TMDB movie feed                                     | `loading.tsx`, empty feed, `error.tsx`            |
 | `/movies`                 | Movie category/filter list | `category`, `genre`, `page` | TMDB movie list/discover                            | Loading, empty, invalid-filter fallback, error    |
-| `/movies/[id]`            | Movie details              | numeric `id`                | Details, credits, videos, similar, account state    | Loading, `not-found.tsx`, partial sections, error |
+| `/movies/[id]`            | Movie details              | numeric `id`                | Details, credits, videos, similar                   | Loading, `not-found.tsx`, safe missing-data fallbacks, error |
 | `/tv`                     | TV category/filter list    | `category`, `genre`, `page` | TMDB TV list/discover                               | Same as movies                                    |
-| `/tv/[id]`                | TV details                 | numeric `id`                | Details, credits, videos, similar, seasons/episodes | Same as movie details                             |
+| `/tv/[id]`                | TV details                 | numeric `id`                | Details, aggregate credits, videos, similar, seasons | Loading, `not-found.tsx`, safe missing-data fallbacks, error |
+| `/tv/[id]/season/[seasonNumber]` | TV season and episode list | numeric `id`, season number | Season details and episodes                  | Loading, `not-found.tsx`, empty state, error       |
+| `/tv/[id]/season/[seasonNumber]/episode/[episodeNumber]` | TV episode details | numeric `id`, season and episode numbers | Episode details, cast, crew | Loading, `not-found.tsx`, safe missing-data fallbacks, error |
 | `/actors`                 | Trending actors            | `page`                      | TMDB trending people                                | Loading, empty, error                             |
 | `/actors/[id]`            | Actor details              | numeric `id`                | Person, external IDs, combined credits              | Loading, not found, partial fields, error         |
 | `/search`                 | Multi-type search          | `q`, `page`                 | TMDB multi-search                                   | Empty query state, loading, empty, error          |
