@@ -1,24 +1,23 @@
 // app/error.tsx
 "use client";
 
-import { Button } from "@/components/ui/button";
+import RouteError from "@/components/media/RouteError";
 
 export default function Error({
   error,
-  reset,
+  retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  retry: () => void;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center py-40 text-center">
-      <h2 className="font-headline text-headline-md text-content-bone">
-        Something went wrong
-      </h2>
-      <p className="mt-2 text-content-warm">We couldn&apos;t load this page.</p>
-      <Button variant="outline" onClick={() => reset()} className="mt-4 ...">
-        Try again
-      </Button>
-    </div>
+    <RouteError
+      error={error}
+      retry={retry}
+      title="We couldn&apos;t load this page"
+      description="The archive couldn&apos;t be reached right now. Please try again in a moment."
+      returnHref="/"
+      returnLabel="Return home"
+    />
   );
 }

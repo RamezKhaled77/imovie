@@ -6,7 +6,7 @@ Record the external TMDB contract needed by MATINÉE and separate verified facts
 
 ## Status
 
-Partially verified against official TMDB Developer documentation fetched 2026-09-21; see each verification cell.
+Partially verified against official TMDB Developer documentation. Actor, TV, season, and episode references were rechecked 2026-10-12; see each verification cell.
 
 ## Related docs
 
@@ -50,6 +50,12 @@ Partially verified against official TMDB Developer documentation fetched 2026-09
 | TV on the air           | `GET /3/tv/on_the_air`                   | `language`, `page`                                                                        | paged TV summaries                                                                                                 | Yes                        |
 | TV popular              | `GET /3/tv/popular`                      | `language`, `page`                                                                        | paged TV summaries                                                                                                 | Yes                      |
 | TV top rated            | `GET /3/tv/top_rated`                    | `language`, `page`                                                                        | paged TV summaries                                                                                                 | Yes                     |
+| TV details              | `GET /3/tv/{series_id}`                  | series_id, language                                                                       | TV details and season summaries                                                                                    | Yes (rechecked 2026-10-12) |
+| TV aggregate credits    | `GET /3/tv/{series_id}/aggregate_credits` | series_id, language                                                                     | Cast and crew across all episodes                                                                                 | Yes (rechecked 2026-10-12) |
+| TV videos               | `GET /3/tv/{series_id}/videos`            | series_id, language                                                                       | Trailer and other video records                                                                                    | Yes (rechecked 2026-10-12) |
+| Similar TV shows        | `GET /3/tv/{series_id}/similar`            | series_id, language, page                                                                 | Paged similar TV summaries                                                                                         | Yes (rechecked 2026-10-12) |
+| TV season details       | `GET /3/tv/{series_id}/season/{season_number}` | series_id, season_number, language                                                  | Season fields and episode summaries                                                                                | Yes (rechecked 2026-10-12) |
+| TV episode details      | `GET /3/tv/{series_id}/season/{season_number}/episode/{episode_number}` | series_id, season_number, episode_number, language | Episode details, guest stars, crew                                                         | Yes (rechecked 2026-10-12) |
 | Movie discover          | `GET /3/discover/movie`                  | `with_genres`, category-derived date/release/region preset, `page`, `language`, `sort_by` | paged movie summaries                                                                                              | Yes                        |
 | TV discover             | `GET /3/discover/tv`                     | `with_genres`, category-derived date/status/region preset, `page`, `language`, `sort_by`  | paged TV summaries                                                                                                 | Yes                         |
 | Configuration           | `GET /3/configuration`                   | none                                                                                      | image base URLs and sizes                                                                                          | Yes                                                                    |
@@ -61,7 +67,7 @@ Partially verified against official TMDB Developer documentation fetched 2026-09
 | Rate movie/TV           | Media-specific rate endpoint             | session and rating body                                                                   | status                                                                                                             | Will not use them      |
 | Person details          | `GET /3/person/{person_id}`              | person_id, language                                                                       | name, biography, gender, birthday, deathday, place_of_birth, popularity, profile_path                              | Yes                        |
 | Person external IDs     | `GET /3/person/{person_id}/external_ids` | person_id                                                                                 | imdb_id and other IDs                                                                                              | Yes                                                                    |
-| Person combined credits | `https://api.themoviedb.org/3/person/{person_id}/movie/tv_credits`         | person_id, language, page                                                                 | movie/tv credit summaries and dates                                                                                | Yes                         |
+| Person combined credits | `GET /3/person/{person_id}/combined_credits` | person_id, language                                                                     | Movie/TV credit summaries, roles, and dates                                                                        | Yes (rechecked 2026-10-12) |
 
 ## Required lookups
 

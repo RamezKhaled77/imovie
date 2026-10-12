@@ -1,7 +1,6 @@
 function getImageUrl(
   path: string | null,
-
-  size: "w200" | "w500" | "original",
+  size: "w200" | "w300" | "w500" | "w780" | "w1280" | "original",
 ): string | null {
   if (!path) return null;
 
