@@ -42,6 +42,7 @@ export default async function TvPage({ searchParams }: TvPageProps) {
         />
         <TvResults
           category={category}
+          genreIds={genreIds}
           shows={showsData.results}
           totalResults={showsData.total_results}
           page={page}

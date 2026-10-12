@@ -1,5 +1,5 @@
-import MediaLoading from "@/components/media/MediaLoading";
+import MediaListLoading from "@/components/media/MediaListLoading";
 
 export default function TvLoading() {
-  return <MediaLoading label="TV shows" />;
+  return <MediaListLoading label="TV shows" hasFilters />;
 }

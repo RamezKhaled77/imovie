@@ -1,5 +1,5 @@
-import MediaLoading from "@/components/media/MediaLoading";
+import MediaListLoading from "@/components/media/MediaListLoading";
 
 export default function ActorsLoading() {
-  return <MediaLoading label="actors" />;
+  return <MediaListLoading label="trending actors" />;
 }
