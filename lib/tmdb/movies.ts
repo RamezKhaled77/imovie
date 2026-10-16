@@ -13,6 +13,12 @@ async function getPopularMovies() {
   return data;
 }
 
+async function getLatestMovies(page: number) {
+  return tmdbFetch<MovieListResponse>("/movie/now_playing", {
+    page: String(page),
+  });
+}
+
 // ========================================================================================
 
 const CATEGORY_ENDPOINTS = {
@@ -60,4 +66,4 @@ async function getMovies({
 
 export type { MovieCategory };
 
-export { getTrendingMovies, getPopularMovies, getMovies };
+export { getTrendingMovies, getPopularMovies, getLatestMovies, getMovies };

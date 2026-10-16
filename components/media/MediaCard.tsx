@@ -23,7 +23,7 @@ export default function MediaCard({
   const imageUrl = getImageUrl(imagePath, "w500");
 
   return (
-    <article className="group overflow-hidden rounded-sm border border-border-hairline bg-surface-reel transition-colors hover:border-border-strong">
+    <article className="group overflow-hidden rounded-sm border border-border-hairline bg-surface-reel transition-colors hover:border-border-strong z-40">
       <Link
         href={href}
         aria-label={`View ${mediaType.toLowerCase()} details for ${title}`}

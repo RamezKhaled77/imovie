@@ -12,7 +12,7 @@ export default function PersonCard({ person }: { person: PersonSummary }) {
     .join(", ");
 
   return (
-    <article className="group overflow-hidden rounded-sm border border-border-hairline bg-surface-reel transition-colors hover:border-border-strong">
+    <article className="group overflow-hidden rounded-sm border border-border-hairline bg-surface-reel transition-colors hover:border-border-strong z-40">
       <Link
         href={`/actors/${person.id}`}
         aria-label={`View actor details for ${person.name}`}
@@ -36,8 +36,7 @@ export default function PersonCard({ person }: { person: PersonSummary }) {
             aria-label={`TMDB popularity: ${person.popularity.toFixed(1)}`}
             className="absolute right-2 top-2 rounded-sm border border-brand-brass-border bg-surface-ink/90 px-2 py-1 font-mono text-xs font-semibold text-brand-brass"
           >
-            POP{" "}
-            {person.popularity.toFixed(1)}
+            POP {person.popularity.toFixed(1)}
           </span>
         </div>
         <div className="space-y-1 px-3 py-2.5">

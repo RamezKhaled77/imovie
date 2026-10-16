@@ -6,7 +6,7 @@ Sequence MATINÉE so each phase teaches one coherent Next.js concept and leaves 
 
 ## Status
 
-Planning baseline; open decisions gate the phases named below.
+Implementation is underway; checkboxes track verified tasks, while open decisions remain gates for the work they affect.
 
 ## Related docs
 
@@ -44,9 +44,9 @@ Planning baseline; open decisions gate the phases named below.
 
 **Tasks:**
 
-- [ ] Resolve the home feed endpoint and “latest” meaning.
-- [ ] Build grid/pagination and loading/empty/error states.
-- [ ] Apply design-system poster ratios, typography, focus, and alt text.
+- [x] Resolve the home feed endpoint and “latest” meaning (`/movie/now_playing`).
+- [x] Build grid/pagination and loading/empty/error states.
+- [x] Apply design-system poster ratios, typography, focus, and alt text.
 - [ ] Use accepted dropdown primitive decision DEC-015 and resolve open genre loading decision DEC-023/DEC-027.
 
 **Deliverables:** home route and shared navbar shell.
@@ -65,10 +65,10 @@ Planning baseline; open decisions gate the phases named below.
 
 **Tasks:**
 
-- [ ] Implement accepted category URL shape DEC-012.
-- [ ] Implement accepted AND genre semantics DEC-017.
-- [ ] Implement category validation, genre IDs, and page reset.
-- [ ] Add pagination and invalid/empty/error states.
+- [x] Implement accepted category URL shape DEC-012.
+- [x] Implement accepted AND genre semantics DEC-017.
+- [x] Implement category validation, genre IDs, and page reset.
+- [x] Add pagination and invalid/empty/error states.
 
 **Deliverables:** movie list route and filter Client Components.
 
@@ -128,10 +128,10 @@ Planning baseline; open decisions gate the phases named below.
 
 **Tasks:**
 
-- [ ] Build `/search?q=&page=` with multi-search mapping.
-- [ ] Add debounced `router.replace` and suggestion Route Handler.
-- [ ] Handle stale responses, keyboard navigation, and empty query.
-- [ ] Add metadata for result pages.
+- [x] Build `/search?q=&page=` with multi-search mapping.
+- [x] Add debounced `router.replace` and suggestion Route Handler.
+- [x] Handle stale responses, keyboard navigation, and empty query.
+- [x] Add metadata for result pages.
 
 **Deliverables:** search results and navbar suggestions.
 

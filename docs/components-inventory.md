@@ -26,7 +26,7 @@ Worksheet; the final Server or Client choice is intentionally owner-owned where 
 | Movies menu | All routes | Movie category links                | Keyboard open/close and active item | Category labels                  | Closed/open              | OWNER TO DECIDE — who owns roving focus?                  |
 | TV menu     | All routes | TV category links                   | Keyboard open/close and active item | Category labels                  | Closed/open              | OWNER TO DECIDE — how is focus restored?                  |
 | Genre menu  | All routes | Genre filtering links               | Keyboard selection                  | Genre list                       | Loading/empty/error      | OWNER TO DECIDE — how should shared data be loaded?       |
-| Search bar  | All routes | Search entry                        | Debounce, submit, suggestions       | Query and suggestion results     | Idle/loading/empty/error | OWNER TO DECIDE — where should debounce state live?       |
+| Search bar  | All routes | Search entry                        | Debounce, submit, keyboard suggestions | Query and suggestion results  | Idle/loading/empty/error | Client Component; updates the URL and reads suggestions from the app Route Handler. |
 
 ### Media
 
