@@ -4,7 +4,6 @@ import {
   Bookmark,
   ChevronDown,
   Menu,
-  Search,
   UserRound,
   X,
 } from "lucide-react";
@@ -18,14 +17,9 @@ import {
 import { Button } from "../ui/button";
 import GenresDropdown from "../filters/GenresDropdown";
 import Link from "next/link";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import { Genre } from "@/lib/tmdb/types";
-
-const primaryMenu = {
-  Movies: ["Popular", "Now Playing", "Top Rated", "Award Winners"],
-  "TV Shows": ["Top Series", "New Episodes", "Critics Picks", "Anime"],
-};
+import SearchBox from "@/components/search/SearchBox";
+import { primaryMenu } from "@/lib/constants";
 
 export default function NavMenuMobile({
   movieGenres,
@@ -77,10 +71,20 @@ export default function NavMenuMobile({
                 <DropdownMenuContent className="min-w-[180px] rounded-xl border border-border-hairline bg-surface-reel p-2 text-content-bone shadow-2xl">
                   {items.map((item) => (
                     <DropdownMenuItem
-                      key={item}
+                      key={item.endPoint}
+                      render={
+                        <Link
+                          href={`${
+                            label === "Movies"
+                              ? "/movies?category="
+                              : "/tv?category="
+                          }${item.endPoint}`}
+                          onClick={() => setMobileMenuOpen(false)}
+                        />
+                      }
                       className="cursor-pointer rounded-md px-2 py-1.5 text-sm text-content-bone focus:bg-surface-raised focus:text-brand-vermilion"
                     >
-                      {item}
+                      {item.name}
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
@@ -97,14 +101,7 @@ export default function NavMenuMobile({
             Actors
           </Link>
 
-          <Label className="relative block">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-content-fog" />
-            <Input
-              type="search"
-              placeholder="Search films, series, actors..."
-              className="h-10 w-full rounded-md border border-border-hairline bg-surface-raised pl-9 pr-3 text-sm text-content-bone placeholder:text-content-fog outline-none"
-            />
-          </Label>
+          <SearchBox onNavigate={() => setMobileMenuOpen(false)} />
 
           <div className="flex items-center justify-between gap-2">
             <Button

@@ -23,7 +23,7 @@ Accepted URL-state principle, query-parameter category shape (DEC-012), and AND 
 
 | URL                       | Purpose                    | Params                      | Data sources                                        | Loading/error/not-found                           |
 | ------------------------- | -------------------------- | --------------------------- | --------------------------------------------------- | ------------------------------------------------- |
-| `/`                       | Latest movie discovery     | `page`                      | TMDB movie feed                                     | `loading.tsx`, empty feed, `error.tsx`            |
+| `/`                       | Latest movie discovery     | `page`                      | TMDB `GET /3/movie/now_playing`                    | `loading.tsx`, empty feed, `error.tsx`            |
 | `/movies`                 | Movie category/filter list | `category`, `genre`, `page` | TMDB movie list/discover                            | Loading, empty, invalid-filter fallback, error    |
 | `/movies/[id]`            | Movie details              | numeric `id`                | Details, credits, videos, similar                   | Detail skeleton, `not-found.tsx`, safe missing-data fallbacks, retryable error |
 | `/tv`                     | TV category/filter list    | `category`, `genre`, `page` | TMDB TV list/discover                               | List skeleton, empty/out-of-range recovery, retryable error |

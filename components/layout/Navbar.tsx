@@ -1,14 +1,14 @@
-import { Bookmark, Search, UserRound } from "lucide-react";
+import { Bookmark, UserRound } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import GenresDropdown from "@/components/filters/GenresDropdown";
 import Link from "next/link";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import { getGenres } from "@/lib/tmdb/genres";
 import NavMenuMobile from "./NavMenuMobile";
 import { primaryMenu } from "@/lib/constants";
 import NavDropdown from "./NavDropdown";
+import SearchBox from "@/components/search/SearchBox";
+import { Suspense } from "react";
 
 export default async function Navbar() {
   const [movieGenresRes, tvGenresRes] = await Promise.all([
@@ -19,7 +19,7 @@ export default async function Navbar() {
   const tvGenres = tvGenresRes.genres;
 
   return (
-    <header className="border-b border-border-hairline bg-surface-ink/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] backdrop-blur-md">
+    <header className="relative z-50 border-b border-border-hairline bg-surface-ink/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] backdrop-blur-md">
       <nav className="mx-auto flex w-full flex-col gap-3 px-4 py-4 md:px-5 lg:px-8">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 md:gap-4">
@@ -43,7 +43,7 @@ export default async function Navbar() {
                 items={primaryMenu.Movies}
               />
               <NavDropdown
-                basePath="/tv"
+                basePath="/tv?category="
                 label="Tv Shows"
                 items={primaryMenu["TV Shows"]}
               />
@@ -58,14 +58,16 @@ export default async function Navbar() {
           </div>
 
           <div className="hidden flex-1 items-center justify-end gap-3 xl:flex">
-            <Label className="relative block w-full max-w-[380px]">
-              <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-content-fog" />
-              <Input
-                type="search"
-                placeholder="Search films, series, actors..."
-                className="h-9 w-full rounded-lg bg-surface-raised/80 pl-10 pr-4 text-sm text-content-bone placeholder:text-content-fog transition-colors"
-              />
-            </Label>
+            <Suspense
+              fallback={
+                <div
+                  aria-hidden="true"
+                  className="h-9 w-full max-w-[380px] rounded-sm border border-border-hairline bg-surface-raised"
+                />
+              }
+            >
+              <SearchBox className="max-w-[380px]" />
+            </Suspense>
 
             <Button
               type="button"

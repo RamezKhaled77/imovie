@@ -73,6 +73,62 @@ export interface PersonListResponse {
   total_results: number;
 }
 
+export interface MovieSearchResult {
+  id: number;
+  media_type: "movie";
+  title: string;
+  poster_path: string | null;
+  release_date?: string;
+  vote_average?: number;
+  overview?: string;
+}
+
+export interface TvSearchResult {
+  id: number;
+  media_type: "tv";
+  name: string;
+  poster_path: string | null;
+  first_air_date?: string;
+  vote_average?: number;
+  overview?: string;
+}
+
+export interface PersonSearchResult {
+  id: number;
+  media_type: "person";
+  name: string;
+  profile_path: string | null;
+  known_for_department?: string;
+  popularity: number;
+  known_for?: PersonKnownFor[];
+}
+
+export type MultiSearchResult =
+  | MovieSearchResult
+  | TvSearchResult
+  | PersonSearchResult;
+
+export type SearchSuggestion =
+  | Pick<
+      MovieSearchResult,
+      "id" | "media_type" | "title" | "poster_path" | "release_date"
+    >
+  | Pick<
+      TvSearchResult,
+      "id" | "media_type" | "name" | "poster_path" | "first_air_date"
+    >
+  | Pick<
+      PersonSearchResult,
+      "id" | "media_type" | "name" | "profile_path" | "known_for_department"
+    >;
+
+export interface MultiSearchResponse {
+  page: number;
+  results: MultiSearchResult[];
+  total_pages: number;
+  total_results: number;
+}
+
 export interface GenreItem {
   id: number;
   name: string;
