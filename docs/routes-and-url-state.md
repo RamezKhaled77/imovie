@@ -33,8 +33,9 @@ Accepted URL-state principle, query-parameter category shape (DEC-012), and AND 
 | `/actors`                 | Trending actors            | `page`                      | TMDB trending people                                | List skeleton, empty state, retryable error       |
 | `/actors/[id]`            | Actor details              | numeric `id`                | Person, external IDs, combined credits              | Detail skeleton, `not-found.tsx`, empty credits, retryable error |
 | `/search`                 | Multi-type search          | `q`, `page`                 | TMDB multi-search                                   | Empty query state, loading, empty, error          |
-| `/login`                  | Login entry                | safe return path only       | Auth action                                         | Redirect/error message                            |
-| `/api/auth/callback`      | TMDB callback              | provider callback params    | TMDB session endpoint                               | Safe redirect/error response                      |
+| `/login`                  | TMDB login explainer       | safe return path, status    | Session cookie                                      | Login entry or return to requested local route     |
+| `/api/auth/login`         | TMDB login start           | safe return path            | TMDB request-token endpoint                        | Redirect to TMDB or safe login error               |
+| `/api/auth/callback`      | TMDB callback              | provider callback params    | TMDB session endpoint                               | Set session cookie or safe login error             |
 | `/api/search/suggestions` | Navbar suggestions         | `q`                         | Server calls TMDB multi-search                      | JSON error/empty response                         |
 
 ## URL state contract

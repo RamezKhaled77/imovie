@@ -20,13 +20,16 @@ import Link from "next/link";
 import { Genre } from "@/lib/tmdb/types";
 import SearchBox from "@/components/search/SearchBox";
 import { primaryMenu } from "@/lib/constants";
+import { logout } from "@/actions/auth";
 
 export default function NavMenuMobile({
   movieGenres,
   tvGenres,
+  isAuthenticated,
 }: {
   movieGenres: Genre[];
   tvGenres: Genre[];
+  isAuthenticated: boolean;
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -113,16 +116,36 @@ export default function NavMenuMobile({
               Watchlist
             </Button>
 
-            <Button
-              type="button"
-              variant="outline"
-              className="inline-flex items-center gap-2 rounded-md border border-border-hairline bg-surface-raised px-3 py-2 text-sm font-medium text-content-bone"
-            >
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-vermilion/10 text-brand-vermilion">
-                <UserRound className="h-3.5 w-3.5" />
-              </span>
-              Log in
-            </Button>
+            {isAuthenticated ? (
+              <form action={logout}>
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="inline-flex items-center gap-2 rounded-md border border-border-hairline bg-surface-raised px-3 py-2 text-sm font-medium text-content-bone"
+                >
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-vermilion/10 text-brand-vermilion">
+                    <UserRound className="h-3.5 w-3.5" />
+                  </span>
+                  Log out
+                </Button>
+              </form>
+            ) : (
+              <Button
+                render={
+                  <Link
+                    href="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                  />
+                }
+                variant="outline"
+                className="inline-flex items-center gap-2 rounded-md border border-border-hairline bg-surface-raised px-3 py-2 text-sm font-medium text-content-bone"
+              >
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-vermilion/10 text-brand-vermilion">
+                  <UserRound className="h-3.5 w-3.5" />
+                </span>
+                Log in
+              </Button>
+            )}
           </div>
         </div>
       )}

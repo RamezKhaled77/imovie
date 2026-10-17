@@ -9,11 +9,14 @@ import { primaryMenu } from "@/lib/constants";
 import NavDropdown from "./NavDropdown";
 import SearchBox from "@/components/search/SearchBox";
 import { Suspense } from "react";
+import { logout } from "@/actions/auth";
+import { getSessionId } from "@/lib/auth/session";
 
 export default async function Navbar() {
-  const [movieGenresRes, tvGenresRes] = await Promise.all([
+  const [movieGenresRes, tvGenresRes, sessionId] = await Promise.all([
     getGenres("movie"),
     getGenres("tv"),
+    getSessionId(),
   ]);
   const movieGenres = movieGenresRes.genres;
   const tvGenres = tvGenresRes.genres;
@@ -77,17 +80,35 @@ export default async function Navbar() {
               <Bookmark className="h-4 w-4" />
             </Button>
 
-            <Button
-              type="button"
-              className="inline-flex items-center gap-2 rounded-lg border border-border-hairline bg-surface-raised px-4 py-1 h-9 text-sm font-medium text-content-bone transition-colors hover:border-brand-vermilion/50 hover:text-brand-vermilion"
-            >
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-vermilion/10 text-brand-vermilion">
-                <UserRound className="h-4 w-4" />
-              </span>
-              Log in with TMDB
-            </Button>
+            {sessionId ? (
+              <form action={logout}>
+                <Button
+                  type="submit"
+                  className="inline-flex h-9 items-center gap-2 rounded-lg border border-border-hairline bg-surface-raised px-4 py-1 text-sm font-medium text-content-bone transition-colors hover:border-brand-vermilion/50 hover:text-brand-vermilion"
+                >
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-vermilion/10 text-brand-vermilion">
+                    <UserRound className="h-4 w-4" />
+                  </span>
+                  Log out
+                </Button>
+              </form>
+            ) : (
+              <Button
+                render={<Link href="/login" />}
+                className="inline-flex h-9 items-center gap-2 rounded-lg border border-border-hairline bg-surface-raised px-4 py-1 text-sm font-medium text-content-bone transition-colors hover:border-brand-vermilion/50 hover:text-brand-vermilion"
+              >
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-vermilion/10 text-brand-vermilion">
+                  <UserRound className="h-4 w-4" />
+                </span>
+                Log in with TMDB
+              </Button>
+            )}
           </div>
-          <NavMenuMobile movieGenres={movieGenres} tvGenres={tvGenres} />
+          <NavMenuMobile
+            movieGenres={movieGenres}
+            tvGenres={tvGenres}
+            isAuthenticated={Boolean(sessionId)}
+          />
         </div>
       </nav>
     </header>

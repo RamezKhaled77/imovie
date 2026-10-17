@@ -149,10 +149,10 @@ Implementation is underway; checkboxes track verified tasks, while open decision
 
 **Tasks:**
 
-- [ ] Implement login start and safe return-path validation.
-- [ ] Implement callback Route Handler and session exchange.
-- [ ] Decide callback hardening (DEC-020) and logout (DEC-021).
-- [ ] Handle denial, expiry, missing params, and revoked sessions.
+- [x] Implement login start and safe return-path validation.
+- [x] Implement callback Route Handler and session exchange.
+- [x] Decide callback hardening (DEC-020) and logout (DEC-021).
+- [x] Handle denial, expired/revoked request tokens, missing params, and callback replay.
 
 **Deliverables:** login flow, session helper, logout behavior.
 
@@ -173,6 +173,7 @@ Implementation is underway; checkboxes track verified tasks, while open decision
 - [ ] Verify favorite/rating endpoint contracts.
 - [ ] Derive account ID server-side.
 - [ ] Add session verification and input validation in every action.
+- [ ] Clear the local cookie when TMDB rejects a revoked session with 401.
 - [ ] Revalidate details/account state and implement pending/error UI.
 - [ ] Decide logged-out behavior (DEC-022).
 
