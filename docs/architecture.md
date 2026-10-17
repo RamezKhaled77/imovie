@@ -6,7 +6,7 @@ Explain where MATINÉE code runs, who initiates it, and how data and secrets cro
 
 ## Status
 
-Accepted runtime boundaries; caching, UI primitives, callback hardening, logout, and testing remain open.
+Accepted runtime boundaries; caching and testing strategy remain open.
 
 ## Related docs
 
@@ -71,13 +71,14 @@ sequenceDiagram
   participant B as Browser
   participant N as Next.js server
   participant T as TMDB
-  B->>N: Start login
+  B->>N: GET /api/auth/login
   N->>T: GET /3/authentication/token/new
   T-->>N: request_token
-  N-->>B: Redirect to TMDB authorize URL
+  N-->>B: Set short-lived httpOnly token cookie; redirect to TMDB
   B->>T: User approves or denies
   T-->>B: Redirect to app callback with token/status
   B->>N: GET /api/auth/callback
+  N->>N: Match callback token to one-time cookie
   N->>T: POST /3/authentication/session/new
   T-->>N: session_id
   N-->>B: Set httpOnly secure sameSite cookie
@@ -87,22 +88,25 @@ sequenceDiagram
 
 | Path                          | Purpose                                                                               | Why separated                                           |
 | ----------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| `app/`                        | Routes, layouts, loading/error/not-found boundaries, and the two Route Handler paths. | Keeps routing and rendering concerns visible.           |
-| `app/api/auth/callback/`      | GET callback from TMDB; validates callback and sets cookie.                           | Only an HTTP redirect endpoint should own this flow.    |
+| `app/`                        | Routes, layouts, loading/error/not-found boundaries, and three Route Handler paths.   | Keeps routing and rendering concerns visible.           |
+| `app/api/auth/login/`         | GET login start; obtains a request token and redirects to TMDB authorization.         | Keeps TMDB credentials and redirects server-side.       |
+| `app/api/auth/callback/`      | GET callback from TMDB; validates one-time token and sets session cookie.             | Only an HTTP redirect endpoint should own this flow.    |
 | `app/api/search/suggestions/` | Browser-facing suggestions endpoint that calls the server data layer.                 | Keeps the token off the client.                         |
-| `actions/`                    | `auth.ts` and `account.ts` Server Actions.                                            | One explicit home for mutations.                        |
+| `actions/`                    | `auth.ts` logout and `account.ts` Server Actions.                                    | One explicit home for mutations.                        |
 | `components/layout/`          | Navbar, menus, shell.                                                                 | Shared navigation is separate from media rendering.     |
 | `components/media/`           | Poster cards, details, cast, seasons, companies.                                      | Media presentation can be reused across movies and TV.  |
 | `components/filters/`         | URL-writing filter controls and pagination.                                           | Client interaction stays narrow.                        |
 | `components/ui/`              | Buttons, inputs, menus, status and feedback primitives.                               | Shared states follow the design system.                 |
 | `lib/tmdb/`                   | Server-only client, feature modules, types, response mapping.                         | One boundary owns authorization and endpoint knowledge. |
-| `lib/auth/session.ts`         | Cookie read/validation and session helpers.                                           | Centralizes session mechanics without an auth library.  |
+| `lib/auth/session.ts`         | Cookie read/write/delete helpers for session and callback request tokens.            | Centralizes session mechanics without an auth library.  |
 | `lib/constants.ts`            | Categories, limits, cookie names, and stable values.                                  | Prevents route and UI drift.                            |
 
 ## Security architecture
 
 - Store the TMDB Read Access Token only in a server-only variable; never name it `NEXT_PUBLIC_*`.
-- Use an httpOnly cookie so JavaScript cannot read the session ID; use `secure` to require HTTPS in production; use `sameSite` to reduce cross-site request sending. Exact policy is an open decision where environment behavior matters.
+- Use an httpOnly cookie so JavaScript cannot read the session ID; use `secure` to require HTTPS in production and `sameSite=lax` for the top-level TMDB callback.
+- The callback accepts only the request token stored in a five-minute httpOnly cookie; it clears the token after use to reject replay.
+- Logout deletes the local session cookie only; the TMDB session remains valid until TMDB revokes it. An externally revoked session is cleared locally on the next authenticated TMDB 401 (implemented with PH-7 account requests).
 - Import `server-only` from the data layer so accidental client imports fail early.
 - Treat every Server Action as a public endpoint: verify the session, validate IDs/types/rating bounds, and ignore authority claims from the browser.
 - Callback redirects must allowlist the app’s own destinations; never reflect arbitrary `next` values.
