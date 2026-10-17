@@ -1,6 +1,6 @@
 import { Bookmark, UserRound } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import GenresDropdown from "@/components/filters/GenresDropdown";
 import Link from "next/link";
 import { getGenres } from "@/lib/tmdb/genres";
@@ -72,13 +72,17 @@ export default async function Navbar() {
               <SearchBox className="max-w-[380px]" />
             </Suspense>
 
-            <Button
-              type="button"
+            <Link
+              href="/account/watchlist"
               aria-label="Saved items"
-              className="flex h-9 w-11 items-center justify-center rounded-lg border border-border-hairline bg-surface-raised text-content-bone transition-colors hover:border-brand-vermilion/50 hover:text-brand-vermilion"
+              className={buttonVariants({
+                variant: "outline",
+                className:
+                  "flex h-9 w-11 items-center justify-center rounded-lg border-border-hairline bg-surface-raised text-content-bone transition-colors hover:border-brand-vermilion/50 hover:text-brand-vermilion",
+              })}
             >
               <Bookmark className="h-4 w-4" />
-            </Button>
+            </Link>
 
             {sessionId ? (
               <form action={logout}>

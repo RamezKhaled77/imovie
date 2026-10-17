@@ -10,14 +10,6 @@ async function tmdbFetch<T>(
   return tmdbRequest<T>(`${path}${query}`, init);
 }
 
-async function tmdbPost<T>(path: string, body: object): Promise<T> {
-  return tmdbRequest<T>(path, {
-    method: "POST",
-    body: JSON.stringify(body),
-    cache: "no-store",
-  });
-}
-
 async function tmdbRequest<T>(
   path: string,
   init: RequestInit = {},
@@ -46,7 +38,7 @@ async function tmdbRequest<T>(
 
   if (!response.ok)
     throw new TmdbError(
-      `Something went wrong: ${path} - ${response.status}`,
+      `Something went wrong: ${path.split("?", 1)[0]} - ${response.status}`,
       response.status,
     );
 
@@ -56,6 +48,19 @@ async function tmdbRequest<T>(
     if (!(error instanceof SyntaxError)) throw error;
     throw new TmdbError("TMDB returned an invalid response", response.status);
   }
+}
+
+async function tmdbPost<T>(
+  path: string,
+  body: object,
+  params?: Record<string, string>,
+): Promise<T> {
+  const query = params ? `?${new URLSearchParams(params).toString()}` : "";
+  return tmdbRequest<T>(`${path}${query}`, {
+    method: "POST",
+    body: JSON.stringify(body),
+    cache: "no-store",
+  });
 }
 
 export { tmdbFetch, tmdbPost };

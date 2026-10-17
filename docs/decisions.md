@@ -6,7 +6,7 @@ Keep accepted technical decisions and unresolved choices explicit before code ch
 
 ## Status
 
-Accepted decisions below; 9 open decisions require owner input.
+Accepted decisions below; 8 open decisions require owner input.
 
 ## Related docs
 
@@ -103,7 +103,9 @@ Needed by: PH-6/PH-8. **Accepted:** delete the local cookie only; do not call th
 | Disable with login affordance     | Clear state; visitor must seek login.                  |
 | Allow click and redirect to login | Smooth intent preservation; more return-path handling. |
 
-Needed by: PH-7. Owner decision:
+Needed by: PH-7.
+
+**Accepted:** allow visitors to choose an account action and redirect them to TMDB login with the current movie or TV detail path as the safe return path. Returning from login does not silently submit the mutation; the member can confirm the action on the detail page. **Date:** 2026-10-17.
 
 ### DEC-023: Genre list loading
 
@@ -147,4 +149,4 @@ Needed by: PH-2. Owner decision:
 
 ## Open decision count
 
-9 open decisions: DEC-013, DEC-014, DEC-016, DEC-018, DEC-022, DEC-023, DEC-024, DEC-026, DEC-027.
+8 open decisions: DEC-013, DEC-014, DEC-016, DEC-018, DEC-023, DEC-024, DEC-026, DEC-027.

@@ -109,6 +109,7 @@ sequenceDiagram
 - Logout deletes the local session cookie only; the TMDB session remains valid until TMDB revokes it. An externally revoked session is cleared locally on the next authenticated TMDB 401 (implemented with PH-7 account requests).
 - Import `server-only` from the data layer so accidental client imports fail early.
 - Treat every Server Action as a public endpoint: verify the session, validate IDs/types/rating bounds, and ignore authority claims from the browser.
+- Keep account mutations in `actions/account.ts`, account reads and endpoint contracts in `lib/tmdb/`, and account controls in a focused Client Component. Detail pages request account state only for members and run that request in parallel with their existing reads; session-specific responses are never cached.
 - Callback redirects must allowlist the app’s own destinations; never reflect arbitrary `next` values.
 - Do not log bearer tokens, request tokens, session IDs, cookies, or raw authorization headers.
 

@@ -35,7 +35,7 @@ Worksheet; the final Server or Client choice is intentionally owner-owned where 
 | Media grid     | Home/list/search          | Responsive poster layout      | Card focus and navigation      | Summary items           | Loading/empty/error      | Server Component; cards navigate with links.            |
 | Media card     | Home/list/details similar | Poster, title, metadata       | Hover lift, focus, click       | Poster/title/date/score | Missing image/long title | Server Component; no browser state required.            |
 | Poster frame   | Cards/details             | Stable 2:3 image box          | Link focus                     | Path and alt text       | Missing image            | Shared presentational markup; `poster-frame` token.      |
-| Detail hero    | Movie/TV/person           | Primary identity and metadata | Trailer and account actions    | Detail fields and image | Partial/error            | OWNER TO DECIDE — who owns action pending state?        |
+| Detail hero    | Movie/TV/person           | Primary identity and metadata | Trailer and account actions    | Detail fields and image | Partial/error            | Server-rendered detail; a focused Client Component owns member action pending/feedback state. |
 | Cast rail      | Details                   | Top cast links                | Keyboard link navigation       | Cast credits            | Empty/short              | Server Component; uses a responsive grid.               |
 | Crew/director  | Details                   | Credit attribution            | Person links                   | Crew credits            | Missing                  | OWNER TO DECIDE — no behavior hint beyond links.        |
 | Similar rail   | Movie/TV details          | Related titles                | Links and responsive scroll    | Similar summaries       | Empty/short/error        | OWNER TO DECIDE — how should partial failure render?    |
@@ -43,6 +43,7 @@ Worksheet; the final Server or Client choice is intentionally owner-owned where 
 | Season list    | TV details                | Link to season episode list    | Route navigation                | Season fields           | Loading/empty/error      | Server Component; selection is represented by the URL.  |
 | Episode list   | TV season/details          | Episode details               | Link to episode route           | Episode fields          | Missing still/empty      | Server Component; details loaded per episode route.      |
 | Person profile | Actor details             | Biography and facts           | IMDb external link             | Person and external IDs | Missing facts            | Server Component; data is read-only.                     |
+| Account collection | `/account/watchlist`, `/account/favorites` | Paginated saved movie or TV grid | Collection and media-type links | Session, list, page | Login, empty, error, out-of-range | Session-gated Server Component; account data remains server-only and URL drives pagination/type. |
 
 ### Filters
 
