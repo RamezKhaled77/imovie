@@ -179,6 +179,7 @@ Implementation is underway; checkboxes track verified tasks, while open decision
 - [x] Keep TMDB account I/O in `lib/tmdb/`, mutation endpoints in `actions/`, and browser state in a focused Client Component.
 - [x] Load account state concurrently with detail reads; keep controls responsive and usable at supported breakpoints.
 - [x] Add session-gated, paginated Watchlist and Favorites pages for movie and TV items; link the navbar Watchlist entry to the saved items surface.
+- [x] Wire home/media-card favorite and watchlist controls to session-verified mutations; add quick toggles to saved-list cards.
 - [ ] Verify the legacy `GET /account?session_id` account-ID lookup against a real TMDB member session; the current OpenAPI reference documents only `GET /account/{account_id}`.
 
 **Deliverables:** three Server Actions, usable detail controls, and account-backed Watchlist/Favorites pages.

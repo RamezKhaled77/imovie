@@ -10,6 +10,8 @@ import type {
 } from "@/lib/account-types";
 import { clearSessionId, getSessionId } from "@/lib/auth/session";
 import {
+  getMovieAccountStates,
+  getTvAccountStates,
   getTmdbAccountId,
   setTmdbFavorite,
   setTmdbRating,
@@ -53,6 +55,7 @@ async function performAccountMutation(
     sessionId: string,
     target: AccountTarget,
   ) => Promise<AccountStateUpdate>,
+  collection?: "watchlist" | "favorites",
 ): Promise<AccountActionResult> {
   const target = getAccountTarget(mediaType, mediaId);
   if (!target) {
@@ -72,6 +75,9 @@ async function performAccountMutation(
     const accountId = await getTmdbAccountId(sessionId);
     const update = await mutate(accountId, sessionId, target);
     revalidatePath(target.path);
+    revalidatePath("/account/watchlist");
+    revalidatePath("/account/favorites");
+    if (collection) revalidatePath(`/account/${collection}`);
     return {
       status: "success",
       message: "Your TMDB account was updated.",
@@ -158,6 +164,74 @@ export async function updateFavorite(
       return { field: "favorite", value: favorite };
     },
   );
+}
+
+async function toggleAccountState(
+  mediaType: string,
+  mediaId: number,
+  field: "favorite" | "watchlist",
+  collection?: string,
+): Promise<AccountActionResult> {
+  if (
+    collection !== undefined &&
+    collection !== "watchlist" &&
+    collection !== "favorites"
+  ) {
+    return {
+      status: "error",
+      message: "This saved-list action is invalid. Refresh the page and try again.",
+    };
+  }
+
+  return performAccountMutation(
+    mediaType,
+    mediaId,
+    field,
+    async (accountId, sessionId, target) => {
+      const states =
+        target.mediaType === "movie"
+          ? await getMovieAccountStates(target.mediaId, sessionId)
+          : await getTvAccountStates(target.mediaId, sessionId);
+      const value = !states[field];
+
+      if (field === "favorite") {
+        await setTmdbFavorite(
+          accountId,
+          sessionId,
+          target.mediaType,
+          target.mediaId,
+          value,
+        );
+      } else {
+        await setTmdbWatchlist(
+          accountId,
+          sessionId,
+          target.mediaType,
+          target.mediaId,
+          value,
+        );
+      }
+
+      return { field, value };
+    },
+    collection,
+  );
+}
+
+export async function toggleFavorite(
+  mediaType: string,
+  mediaId: number,
+  collection?: string,
+): Promise<AccountActionResult> {
+  return toggleAccountState(mediaType, mediaId, "favorite", collection);
+}
+
+export async function toggleWatchlist(
+  mediaType: string,
+  mediaId: number,
+  collection?: string,
+): Promise<AccountActionResult> {
+  return toggleAccountState(mediaType, mediaId, "watchlist", collection);
 }
 
 export async function submitRating(

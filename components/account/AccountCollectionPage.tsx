@@ -7,6 +7,7 @@ import type { AccountMediaType } from "@/lib/account-types";
 import type { AccountCollection } from "@/lib/tmdb/account";
 import type { MovieListResponse, TvListResponse } from "@/lib/tmdb/types";
 import { cn } from "@/lib/utils";
+import MediaAccountActions from "@/components/media/MediaAccountActions";
 
 function getCollectionHref(
   collection: AccountCollection,
@@ -148,6 +149,19 @@ export default function AccountCollectionPage({
                     year={movie.release_date?.slice(0, 4)}
                     voteAverage={movie.vote_average}
                     mediaType="Movie"
+                    actions={
+                      <MediaAccountActions
+                        mediaType="movie"
+                        mediaId={movie.id}
+                        initialFavorite={
+                          collection === "favorites" ? true : null
+                        }
+                        initialWatchlist={
+                          collection === "watchlist" ? true : null
+                        }
+                        collection={collection}
+                      />
+                    }
                   />
                 ))
               : (data as TvListResponse).results.map((show) => (
@@ -159,6 +173,19 @@ export default function AccountCollectionPage({
                     year={show.first_air_date?.slice(0, 4)}
                     voteAverage={show.vote_average}
                     mediaType="TV"
+                    actions={
+                      <MediaAccountActions
+                        mediaType="tv"
+                        mediaId={show.id}
+                        initialFavorite={
+                          collection === "favorites" ? true : null
+                        }
+                        initialWatchlist={
+                          collection === "watchlist" ? true : null
+                        }
+                        collection={collection}
+                      />
+                    }
                   />
                 ))}
           </MediaGrid>
