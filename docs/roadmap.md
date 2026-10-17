@@ -170,14 +170,19 @@ Implementation is underway; checkboxes track verified tasks, while open decision
 
 **Tasks:**
 
-- [ ] Verify favorite/rating endpoint contracts.
-- [ ] Derive account ID server-side.
-- [ ] Add session verification and input validation in every action.
-- [ ] Clear the local cookie when TMDB rejects a revoked session with 401.
-- [ ] Revalidate details/account state and implement pending/error UI.
-- [ ] Decide logged-out behavior (DEC-022).
+- [x] Verify watchlist, favorite, rating, and account-state endpoint contracts.
+- [x] Derive account ID server-side from the authenticated session; never accept it from the browser.
+- [x] Add session verification and input validation in every action.
+- [x] Clear the local cookie when TMDB rejects a revoked session with 401.
+- [x] Revalidate details/account state and implement pending, success, failure, and stale-session UI.
+- [x] Apply DEC-022: send logged-out visitors to TMDB login and return them to the current detail page.
+- [x] Keep TMDB account I/O in `lib/tmdb/`, mutation endpoints in `actions/`, and browser state in a focused Client Component.
+- [x] Load account state concurrently with detail reads; keep controls responsive and usable at supported breakpoints.
+- [x] Add session-gated, paginated Watchlist and Favorites pages for movie and TV items; link the navbar Watchlist entry to the saved items surface.
+- [x] Wire home/media-card favorite and watchlist controls to session-verified mutations; add quick toggles to saved-list cards.
+- [ ] Verify the legacy `GET /account?session_id` account-ID lookup against a real TMDB member session; the current OpenAPI reference documents only `GET /account/{account_id}`.
 
-**Deliverables:** three Server Actions and usable controls.
+**Deliverables:** three Server Actions, usable detail controls, and account-backed Watchlist/Favorites pages.
 
 **Concept learned:** Server Actions as public mutation endpoints and revalidation.
 

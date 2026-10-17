@@ -14,7 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import GenresDropdown from "../filters/GenresDropdown";
 import Link from "next/link";
 import { Genre } from "@/lib/tmdb/types";
@@ -107,14 +107,18 @@ export default function NavMenuMobile({
           <SearchBox onNavigate={() => setMobileMenuOpen(false)} />
 
           <div className="flex items-center justify-between gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              className="inline-flex items-center gap-2 rounded-md border border-border-hairline bg-surface-raised px-3 py-2 text-sm text-content-bone"
+            <Link
+              href="/account/watchlist"
+              onClick={() => setMobileMenuOpen(false)}
+              className={buttonVariants({
+                variant: "outline",
+                className:
+                  "inline-flex items-center gap-2 rounded-md border-border-hairline bg-surface-raised px-3 py-2 text-sm text-content-bone",
+              })}
             >
               <Bookmark className="h-4 w-4" />
               Watchlist
-            </Button>
+            </Link>
 
             {isAuthenticated ? (
               <form action={logout}>

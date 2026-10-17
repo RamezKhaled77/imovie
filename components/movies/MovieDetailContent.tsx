@@ -5,6 +5,8 @@ import MediaGrid from "@/components/media/MediaGrid";
 import SectionHeading from "@/components/media/SectionHeading";
 import CastRail from "@/components/media/CastRail";
 import PersonCreditLink from "@/components/media/PersonCreditLink";
+import AccountActions from "@/components/media/AccountActions";
+import type { TmdbAccountStates } from "@/lib/account-types";
 import { getImageUrl } from "@/lib/tmdb/image";
 import type {
   CreditsResponse,
@@ -18,11 +20,17 @@ export default function MovieDetailContent({
   credits,
   videos,
   similar,
+  isAuthenticated,
+  accountStates,
+  sessionExpired,
 }: {
   movie: MovieDetails;
   credits: CreditsResponse;
   videos: VideoListResponse;
   similar: MovieListResponse;
+  isAuthenticated: boolean;
+  accountStates: TmdbAccountStates | null;
+  sessionExpired: boolean;
 }) {
   const backdropUrl = getImageUrl(movie.backdrop_path ?? null, "w1280");
   const posterUrl = getImageUrl(movie.poster_path, "w500");
@@ -123,6 +131,14 @@ export default function MovieDetailContent({
                   NO TRAILER IS AVAILABLE
                 </p>
               )}
+              <AccountActions
+                mediaType="movie"
+                mediaId={movie.id}
+                path={`/movies/${movie.id}`}
+                isAuthenticated={isAuthenticated}
+                accountStates={accountStates}
+                sessionExpired={sessionExpired}
+              />
             </div>
           </div>
         </section>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
+import type { ReactNode } from "react";
 import { getImageUrl } from "@/lib/tmdb/image";
 
 export default function MediaCard({
@@ -11,6 +12,7 @@ export default function MediaCard({
   voteAverage,
   mediaType,
   credit,
+  actions,
 }: {
   href: string;
   title: string;
@@ -19,6 +21,7 @@ export default function MediaCard({
   voteAverage?: number;
   mediaType: "Movie" | "TV";
   credit?: string;
+  actions?: ReactNode;
 }) {
   const imageUrl = getImageUrl(imagePath, "w500");
 
@@ -63,6 +66,9 @@ export default function MediaCard({
           )}
         </div>
       </Link>
+      {actions && (
+        <div className="border-t border-border-hairline p-2">{actions}</div>
+      )}
     </article>
   );
 }

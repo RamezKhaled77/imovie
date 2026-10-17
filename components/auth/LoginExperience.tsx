@@ -90,7 +90,7 @@ export default function LoginExperience({
             </h1>
             <p className="mt-3 max-w-2xl text-body-md text-content-fog sm:text-body-lg">
               Connect your TMDB account to curate watchlists, favorites, and
-              ratings. Authentication happens on TMDB; MATINÉE never asks for or
+              ratings. Authentication happens on TMDB; iMovie never asks for or
               stores your password.
             </p>
 

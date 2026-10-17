@@ -4,6 +4,8 @@ import CastRail from "@/components/media/CastRail";
 import MediaCard from "@/components/media/MediaCard";
 import MediaGrid from "@/components/media/MediaGrid";
 import SectionHeading from "@/components/media/SectionHeading";
+import AccountActions from "@/components/media/AccountActions";
+import type { TmdbAccountStates } from "@/lib/account-types";
 import { getImageUrl } from "@/lib/tmdb/image";
 import type {
   CreditsResponse,
@@ -17,11 +19,17 @@ export default function TvDetailContent({
   credits,
   videos,
   similar,
+  isAuthenticated,
+  accountStates,
+  sessionExpired,
 }: {
   show: TvShowDetails;
   credits: CreditsResponse;
   videos: VideoListResponse;
   similar: TvListResponse;
+  isAuthenticated: boolean;
+  accountStates: TmdbAccountStates | null;
+  sessionExpired: boolean;
 }) {
   const backdropUrl = getImageUrl(show.backdrop_path ?? null, "w1280");
   const posterUrl = getImageUrl(show.poster_path, "w500");
@@ -120,6 +128,14 @@ export default function TvDetailContent({
                   NO TRAILER IS AVAILABLE
                 </p>
               )}
+              <AccountActions
+                mediaType="tv"
+                mediaId={show.id}
+                path={`/tv/${show.id}`}
+                isAuthenticated={isAuthenticated}
+                accountStates={accountStates}
+                sessionExpired={sessionExpired}
+              />
             </div>
           </div>
         </section>
