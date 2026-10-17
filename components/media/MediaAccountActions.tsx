@@ -106,11 +106,7 @@ export default function MediaAccountActions({
             className={`size-4 ${states.favorite ? "fill-current" : ""}`}
           />
           {!compact &&
-            (isPending
-              ? "Saving..."
-              : states.favorite
-                ? "Remove favorite"
-                : "Favorite")}
+            (isPending ? "Saving..." : states.favorite ? "Remove" : "Favorite")}
         </Button>
         {compact && (
           <span
@@ -150,7 +146,7 @@ export default function MediaAccountActions({
             (isPending
               ? "Saving..."
               : states.watchlist
-                ? "Remove from watchlist"
+                ? "Remove"
                 : "Watchlist")}
         </Button>
         {compact && (

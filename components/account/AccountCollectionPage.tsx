@@ -30,7 +30,8 @@ export default function AccountCollectionPage({
   page: number;
   data: MovieListResponse | TvListResponse;
 }) {
-  const title = collection === "watchlist" ? "Your Watchlist" : "Your Favorites";
+  const title =
+    collection === "watchlist" ? "Your Watchlist" : "Your Favorites";
   const totalPages = Math.min(Math.max(data.total_pages, 1), 500);
   const results = data.results;
   const outOfRange = page > totalPages;
@@ -68,7 +69,7 @@ export default function AccountCollectionPage({
               aria-current={collection === value ? "page" : undefined}
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "rounded-sm border-border-hairline bg-transparent font-mono text-[10px] uppercase tracking-wide text-content-bone hover:bg-surface-raised",
+                "rounded-sm border-border-hairline bg-transparent font-mono text-[14px] uppercase tracking-wide text-content-bone hover:bg-surface-raised",
                 collection === value &&
                   "border-brand-vermilion bg-brand-vermilion text-surface-ink hover:bg-brand-vermilion-hover hover:text-surface-ink",
               )}
@@ -94,7 +95,7 @@ export default function AccountCollectionPage({
               aria-current={mediaType === value ? "page" : undefined}
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "rounded-sm border-border-hairline bg-transparent font-mono text-[10px] uppercase tracking-wide text-content-bone hover:bg-surface-raised",
+                "rounded-sm border-border-hairline bg-transparent font-mono text-[12px] uppercase tracking-wide text-content-bone hover:bg-surface-raised",
                 mediaType === value &&
                   "border-brand-vermilion bg-brand-vermilion text-surface-ink hover:bg-brand-vermilion-hover hover:text-surface-ink",
               )}
@@ -204,8 +205,8 @@ export default function AccountCollectionPage({
               This list is empty
             </h2>
             <p className="mx-auto mt-2 max-w-prose text-sm text-content-fog">
-              Browse titles and use the account controls on a detail page to
-              add them here.
+              Browse titles and use the account controls on a detail page to add
+              them here.
             </p>
             <Link
               href={mediaType === "movie" ? "/movies" : "/tv"}
