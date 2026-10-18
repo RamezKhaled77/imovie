@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import type { Genre } from "@/lib/tmdb/types";
 import type { MovieCategory } from "@/lib/tmdb/movies";
 import { getMoviesHref } from "./movies-page-utils";

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BookmarkPlus, CirclePlay, Star, Ticket } from "lucide-react";
+import { CirclePlay, Star, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 

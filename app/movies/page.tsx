@@ -1,11 +1,19 @@
+import type { Metadata } from "next";
+
 import MovieCategoryFilters from "@/components/movies/MovieCategoryFilters";
 import MovieGenreFilters from "@/components/movies/MovieGenreFilters";
 import MoviesHeader from "@/components/movies/MoviesHeader";
 import MoviesPagination from "@/components/movies/MoviesPagination";
 import MoviesResults from "@/components/movies/MoviesResults";
+import { isMovieCategory } from "@/components/movies/movies-page-utils";
 import { getGenres } from "@/lib/tmdb/genres";
 import { getMovies } from "@/lib/tmdb/movies";
-import { isMovieCategory } from "@/components/movies/movies-page-utils";
+
+export const metadata: Metadata = {
+  title: "Movies | iMovie",
+  description:
+    "Browse TMDB movie categories, filter by genre, and explore the latest cinema archive.",
+};
 
 type MoviesPageProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

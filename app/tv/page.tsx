@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+import {
+  getValidGenreIds,
+  getValidPage,
+} from "@/components/tv/tv-page-utils";
 import TvCategoryFilters from "@/components/tv/TvCategoryFilters";
 import TvGenreFilters from "@/components/tv/TvGenreFilters";
 import TvHeader from "@/components/tv/TvHeader";
@@ -5,10 +11,12 @@ import TvPagination from "@/components/tv/TvPagination";
 import TvResults from "@/components/tv/TvResults";
 import { getGenres } from "@/lib/tmdb/genres";
 import { getTvShows, isTvCategory } from "@/lib/tmdb/tv";
-import {
-  getValidGenreIds,
-  getValidPage,
-} from "@/components/tv/tv-page-utils";
+
+export const metadata: Metadata = {
+  title: "TV Shows | iMovie",
+  description:
+    "Explore weekly TV picks, category filters, and genre-driven streaming discovery.",
+};
 
 type TvPageProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

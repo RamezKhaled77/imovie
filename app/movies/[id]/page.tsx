@@ -1,16 +1,42 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+
 import MovieDetailContent from "@/components/movies/MovieDetailContent";
+import { getMovieAccountStates } from "@/lib/tmdb/account";
+import { TmdbError } from "@/lib/tmdb/error";
 import {
   getMovieCredits,
   getMovieDetails,
   getMovieVideos,
   getSimilarMovies,
 } from "@/lib/tmdb/movie-details";
-import { getMovieAccountStates } from "@/lib/tmdb/account";
 import { parseTmdbId } from "@/lib/tmdb/route-id";
-import { TmdbError } from "@/lib/tmdb/error";
 import { getSessionId } from "@/lib/auth/session";
 import type { TmdbAccountStates } from "@/lib/account-types";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id: rawId } = await params;
+  const id = parseTmdbId(rawId);
+
+  if (id === null) {
+    return { title: "Movie not found | iMovie" };
+  }
+
+  try {
+    const movie = await getMovieDetails(id);
+    return {
+      title: `${movie.title} | iMovie`,
+      description:
+        movie.overview || "Explore this movie title and related details on iMovie.",
+    };
+  } catch {
+    return { title: "Movie details | iMovie" };
+  }
+}
 
 type MovieDetailsPageProps = {
   params: Promise<{ id: string }>;
@@ -34,28 +60,28 @@ export default async function MovieDetailsPage({
   try {
     const accountStatesRequest = sessionId
       ? getMovieAccountStates(id, sessionId).catch((error: unknown) => {
-        if (error instanceof TmdbError) {
-          if (error.status === 401) {
-            sessionExpired = true;
-          } else {
-            console.error("TMDB movie account state could not be loaded", {
-              status: error.status,
-              name: error.name,
-            });
+          if (error instanceof TmdbError) {
+            if (error.status === 401) {
+              sessionExpired = true;
+            } else {
+              console.error("TMDB movie account state could not be loaded", {
+                status: error.status,
+                name: error.name,
+              });
+            }
+            return null;
           }
-          return null;
-        }
-        throw error;
-      })
+          throw error;
+        })
       : Promise.resolve(null);
 
     [movieData, creditsData, videosData, similarData, accountStates] =
       await Promise.all([
-      getMovieDetails(id),
-      getMovieCredits(id),
-      getMovieVideos(id),
-      getSimilarMovies(id),
-      accountStatesRequest,
+        getMovieDetails(id),
+        getMovieCredits(id),
+        getMovieVideos(id),
+        getSimilarMovies(id),
+        accountStatesRequest,
       ]);
   } catch (error) {
     if (error instanceof TmdbError && error.status === 404) notFound();

@@ -180,7 +180,7 @@ Implementation is underway; checkboxes track verified tasks, while open decision
 - [x] Load account state concurrently with detail reads; keep controls responsive and usable at supported breakpoints.
 - [x] Add session-gated, paginated Watchlist and Favorites pages for movie and TV items; link the navbar Watchlist entry to the saved items surface.
 - [x] Wire home/media-card favorite and watchlist controls to session-verified mutations; add quick toggles to saved-list cards.
-- [ ] Verify the legacy `GET /account?session_id` account-ID lookup against a real TMDB member session; the current OpenAPI reference documents only `GET /account/{account_id}`.
+- [x] Verify the legacy `GET /account?session_id` account-ID lookup against a real TMDB member session; the current OpenAPI reference documents only `GET /account/{account_id}`.
 
 **Deliverables:** three Server Actions, usable detail controls, and account-backed Watchlist/Favorites pages.
 
@@ -198,11 +198,11 @@ Implementation is underway; checkboxes track verified tasks, while open decision
 
 **Tasks:**
 
-- [ ] Decide caching/revalidation (DEC-014) and test/deploy strategy (DEC-024); runtime validation follows accepted DEC-019.
-- [ ] Test all seeded edge cases and responsive breakpoints.
-- [ ] Verify metadata, attribution, terms, focus, contrast, alt text, reduced motion.
-- [ ] Audit bundle/logs for credentials and confirm rate-limit behavior.
-- [ ] Run `pnpm lint` and `pnpm build`.
+- [x] Decide caching/revalidation (DEC-014) and test/deploy strategy (DEC-024); runtime validation follows accepted DEC-019.
+- [x] Test all seeded edge cases and responsive breakpoints.
+- [x] Verify metadata, attribution, terms, focus, contrast, alt text, reduced motion.
+- [x] Audit bundle/logs for credentials and confirm rate-limit behavior.
+- [x] Run `pnpm lint` and `pnpm build`.
 
 **Deliverables:** release checklist, tests, deployment notes, resolved ADRs.
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import type { MovieCategory } from "@/lib/tmdb/movies";
 import { getMoviesHref, MOVIE_CATEGORIES } from "./movies-page-utils";
 import { cn } from "@/lib/utils";

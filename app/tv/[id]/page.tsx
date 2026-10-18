@@ -1,16 +1,42 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+
 import TvDetailContent from "@/components/tv/TvDetailContent";
+import { getSessionId } from "@/lib/auth/session";
+import type { TmdbAccountStates } from "@/lib/account-types";
+import { getTvAccountStates } from "@/lib/tmdb/account";
+import { TmdbError } from "@/lib/tmdb/error";
+import { parseTmdbId } from "@/lib/tmdb/route-id";
 import {
   getSimilarTvShows,
   getTvCredits,
   getTvDetails,
   getTvVideos,
 } from "@/lib/tmdb/tv";
-import { getTvAccountStates } from "@/lib/tmdb/account";
-import { TmdbError } from "@/lib/tmdb/error";
-import { parseTmdbId } from "@/lib/tmdb/route-id";
-import { getSessionId } from "@/lib/auth/session";
-import type { TmdbAccountStates } from "@/lib/account-types";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id: rawId } = await params;
+  const id = parseTmdbId(rawId);
+
+  if (id === null) {
+    return { title: "TV show not found | iMovie" };
+  }
+
+  try {
+    const show = await getTvDetails(id);
+    return {
+      title: `${show.name} | iMovie`,
+      description:
+        show.overview || "Discover this TV show and related episode details on iMovie.",
+    };
+  } catch {
+    return { title: "TV details | iMovie" };
+  }
+}
 
 type TvDetailsPageProps = {
   params: Promise<{ id: string }>;

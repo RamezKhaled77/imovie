@@ -1,12 +1,38 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+
 import PersonDetailContent from "@/components/actors/PersonDetailContent";
+import { TmdbError } from "@/lib/tmdb/error";
+import { parseTmdbId } from "@/lib/tmdb/route-id";
 import {
   getPersonCombinedCredits,
   getPersonDetails,
   getPersonExternalIds,
 } from "@/lib/tmdb/people";
-import { TmdbError } from "@/lib/tmdb/error";
-import { parseTmdbId } from "@/lib/tmdb/route-id";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id: rawId } = await params;
+  const id = parseTmdbId(rawId);
+
+  if (id === null) {
+    return { title: "Actor not found | iMovie" };
+  }
+
+  try {
+    const person = await getPersonDetails(id);
+    return {
+      title: `${person.name} | iMovie`,
+      description:
+        person.biography || "Learn more about this performer and their screen credits on iMovie.",
+    };
+  } catch {
+    return { title: "Actor details | iMovie" };
+  }
+}
 
 type ActorDetailsPageProps = {
   params: Promise<{ id: string }>;

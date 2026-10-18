@@ -57,6 +57,10 @@ export default function Footer() {
             Movie data by TMDB
             <ArrowUpRight aria-hidden="true" className="size-3.5" />
           </a>
+          <p className="mt-3 max-w-xs text-xs leading-5 text-content-fog">
+            This website uses TMDB and the TMDB APIs but is not endorsed,
+            certified, or otherwise approved by TMDB.
+          </p>
         </div>
       </div>
 

@@ -58,7 +58,7 @@ Needed by: PH-3. **Accepted:** use parallel `Promise.all` calls. Required detail
 | Fetch-level caching/revalidation | Familiar and local; exact Next 16 behavior must be verified. |
 | Next 16 Cache Components opt-in  | Newer model; teaches current framework but adds setup.       |
 
-Needed by: PH-8. Owner decision:
+Needed by: PH-8. **Accepted:** use explicit fetch-level caching in the TMDB data client: cache public reads for one hour by default, keep genre lists for 24 hours, and leave search, authentication, account-state, and account-collection requests uncached. Mutations remain uncached and revalidate affected paths. Do not retry 429 responses automatically. **Date:** 2026-10-17.
 
 ### DEC-016: Actor popularity
 
@@ -134,7 +134,7 @@ Needed by: PH-1. Owner decision:
 | Unit + integration + browser tests, deploy to a managed Next host | Broad confidence; setup time.              |
 | Focused route/data tests, deploy target TBD                       | Faster learning start; more residual risk. |
 
-Needed by: PH-8. Owner decision:
+Needed by: PH-8. **Accepted:** use unit and integration tests for the TMDB boundary and Playwright browser tests for public user journeys; validate with lint and a production build. Deploy to a managed Next.js host using the Node.js runtime; the provider/account is selected when release credentials are available. **Date:** 2026-10-17.
 
 ### DEC-026: Discover presets per category
 
@@ -149,4 +149,4 @@ Needed by: PH-2. Owner decision:
 
 ## Open decision count
 
-8 open decisions: DEC-013, DEC-014, DEC-016, DEC-018, DEC-023, DEC-024, DEC-026, DEC-027.
+3 open decisions: DEC-023, DEC-026, DEC-027.
