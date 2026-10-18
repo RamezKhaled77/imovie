@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import TvEpisodeContent from "@/components/tv/TvEpisodeContent";
 import { TmdbError } from "@/lib/tmdb/error";
@@ -6,7 +7,46 @@ import {
   parseSeasonNumber,
   parseTmdbId,
 } from "@/lib/tmdb/route-id";
-import { getTvEpisode } from "@/lib/tmdb/tv";
+import { getTvDetails, getTvEpisode } from "@/lib/tmdb/tv";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{
+    id: string;
+    seasonNumber: string;
+    episodeNumber: string;
+  }>;
+}): Promise<Metadata> {
+  const {
+    id: rawId,
+    seasonNumber: rawSeasonNumber,
+    episodeNumber: rawEpisodeNumber,
+  } = await params;
+  const id = parseTmdbId(rawId);
+  const seasonNumber = parseSeasonNumber(rawSeasonNumber);
+  const episodeNumber = parseEpisodeNumber(rawEpisodeNumber);
+
+  if (id === null || seasonNumber === null || episodeNumber === null) {
+    return { title: "Episode not found" };
+  }
+
+  try {
+    const [show, episode] = await Promise.all([
+      getTvDetails(id),
+      getTvEpisode(id, seasonNumber, episodeNumber),
+    ]);
+
+    return {
+      title: `${show.name} — S${seasonNumber}E${episodeNumber}`,
+      description:
+        episode.overview ||
+        `Read the details for ${show.name} episode ${episodeNumber}.`,
+    };
+  } catch {
+    return { title: "TV episode details" };
+  }
+}
 
 type TvEpisodePageProps = {
   params: Promise<{

@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import HomeHero from "@/components/home/HomeHero";
 import LatestMoviesSection from "@/components/home/LatestMoviesSection";
 import PopularMoviesSection from "@/components/home/PopularMoviesSection";
@@ -8,6 +10,12 @@ import {
   getPopularMovies,
   getTrendingMovies,
 } from "@/lib/tmdb/movies";
+
+export const metadata: Metadata = {
+  title: "iMovie - Your Ultimate Movie Companion",
+  description:
+    "Discover trending films, new releases, and memorable performances with iMovie.",
+};
 
 type HomePageProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

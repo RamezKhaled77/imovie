@@ -20,8 +20,17 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "iMovie | Movie, TV & Actor Discovery",
+  title: {
+    default: "iMovie | Movie, TV & Actor Discovery",
+    template: "%s | iMovie",
+  },
   description: "Discover films, television series, and the people behind them.",
+  applicationName: "iMovie",
+  icons: {
+    icon: "/imovie-icon.png",
+    shortcut: "/imovie-icon.png",
+    apple: "/imovie-icon.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
